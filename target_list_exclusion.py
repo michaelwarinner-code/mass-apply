@@ -31,7 +31,7 @@ MATCH_THRESHOLD = 0.85
 # aggregator data using a longer legal-ish name than the target list's short one.
 MIN_SUBSTRING_LEN = 4
 
-TARGET_STATE_PATH = os.path.join(os.path.dirname(__file__), "..", "state", "state.json")
+TARGET_STATE_PATH = os.path.join(os.path.dirname(__file__), "state", "state.json")
 
 
 def normalize_company_name(name: str) -> str:
@@ -44,7 +44,16 @@ def normalize_company_name(name: str) -> str:
 def load_target_company_names() -> list:
     """Pulls display names (cfg["name"]) out of the existing target-list state.json,
     regardless of whether each entry is currently enabled -- a disabled target-list
-    company should still be excluded from the broad pool, not silently opened up."""
+    company should still be excluded from the broad pool, not silently opened up.
+
+    mass-apply doesn't run job-finder's target-list pipeline, so this file
+    won't exist here unless you deliberately copy it over from job-finder
+    (state/state.json) if you want that same exclusion -- skipping
+    companies you're already hand-networking into so this tool doesn't
+    blind-apply somewhere you have a warmer path. No file just means no
+    exclusions, not an error."""
+    if not os.path.exists(TARGET_STATE_PATH):
+        return []
     with open(TARGET_STATE_PATH) as f:
         state = json.load(f)
     return [cfg.get("name", "") for cfg in state.get("companies", {}).values()]
