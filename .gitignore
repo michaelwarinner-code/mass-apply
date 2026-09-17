@@ -1,0 +1,8 @@
+state/candidate_info.json
+client_secret.json
+token.json
+batches/
+test_output/
+__pycache__/
+*.pyc
+node_modules/
