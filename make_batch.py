@@ -133,9 +133,23 @@ def main():
     state = bs.load_state()
     already_judged_urls = set(state["jobs"].keys())
 
-    print("Discovering + judging new postings...")
-    matches, rejects = discover_and_judge(fantastic_key, profile, target_names,
-                                           already_judged_urls=already_judged_urls)
+    # Only discover/judge enough to fill this batch -- previously this
+    # judged (and billed for) every board from stage 1 every run,
+    # regardless of --batch-size, since that flag only capped the
+    # folder-building step after judging, not judging itself. Any
+    # judged_fit jobs already sitting unbatched from a previous run count
+    # toward the total first, so this doesn't over-search when there's
+    # already a backlog waiting.
+    already_unbatched = len(bs.jobs_with_status(state, "judged_fit"))
+    still_needed = max(0, args.batch_size - already_unbatched)
+
+    if still_needed == 0:
+        print(f"Already have {already_unbatched} judged_fit job(s) waiting -- skipping discovery/judging this run.")
+        matches, rejects = [], []
+    else:
+        print(f"Discovering + judging new postings (stopping once {still_needed} new match(es) are found)...")
+        matches, rejects = discover_and_judge(fantastic_key, profile, target_names,
+                                               already_judged_urls=already_judged_urls, max_matches=still_needed)
     for m in matches:
         bs.set_job_status(state, m["url"], "judged_fit", company_name=m["company_name"], title=m["title"],
                            url=m["url"], ats=m["ats"], board_token=m["board_token"])

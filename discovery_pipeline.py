@@ -14,12 +14,21 @@ from claude_judge_broad import judge_fit_broad
 
 
 def discover_and_judge(fantastic_key: str, profile: str, target_names: list,
-                        already_judged_urls: set = None, limit: int = None, verbose: bool = True) -> tuple:
+                        already_judged_urls: set = None, limit: int = None, max_matches: int = None,
+                        verbose: bool = True) -> tuple:
     """Returns (matches, rejects), each a list of dicts with company_name,
     ats, board_token, title, url, description, match, is_software_company,
     reason. already_judged_urls (from batch_state.json) is checked so a
     posting already judged in a past run never gets re-judged (and
-    re-billed) here."""
+    re-billed) here.
+
+    max_matches stops judging entirely as soon as that many MATCHES have
+    been found -- not the same as limit, which caps how many boards get
+    fetched regardless of match count. Without max_matches, every board
+    from discovery gets judged (and billed) every run even if you only
+    want a small batch out the other end; this is what make_batch.py uses
+    to stop as soon as it has enough for the batch size, instead of
+    judging all ~200 boards to build 1 folder."""
     already_judged_urls = already_judged_urls or set()
 
     postings = discover_greenhouse_ashby_postings(fantastic_key)
@@ -35,6 +44,11 @@ def discover_and_judge(fantastic_key: str, profile: str, target_names: list,
 
     matches, rejects = [], []
     for (ats, token), company_name in boards:
+        if max_matches and len(matches) >= max_matches:
+            if verbose:
+                print(f"[stop-early] {max_matches} match(es) found, stopping before checking more boards")
+            break
+
         if is_target_list_company(company_name, target_names):
             if verbose:
                 print(f"[skip-target-list] {company_name}")
@@ -48,6 +62,9 @@ def discover_and_judge(fantastic_key: str, profile: str, target_names: list,
             continue
 
         for job in jobs:
+            if max_matches and len(matches) >= max_matches:
+                break
+
             title = job["title"]
             url = job.get("url", "")
             if url in already_judged_urls:
