@@ -116,8 +116,19 @@ def process_one_job(job: dict, batch_dir: str, candidate_info: dict, bank_entrie
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--batch-size", type=int, default=BATCH_SIZE)
+    parser.add_argument("--batch-size", type=int, default=BATCH_SIZE,
+                         help="How many jobs to actually BUILD into folders this run.")
+    parser.add_argument("--search-size", type=int, default=None,
+                         help="How many NEW matches to search for/judge this run -- separate from "
+                              "--batch-size on purpose. Discovery costs exactly ONE Fantastic Jobs API "
+                              "call no matter how many matches come out of it, so it's worth searching "
+                              "for a big backlog (e.g. --search-size 100) in a single call, then "
+                              "building only a few at a time (--batch-size 10) across several days -- "
+                              "once there's enough judged_fit backlog, later runs skip discovery "
+                              "entirely and cost zero further Fantastic Jobs calls. Defaults to "
+                              "--batch-size if not given (the original single-purpose behavior).")
     args = parser.parse_args()
+    search_size = args.search_size if args.search_size is not None else args.batch_size
 
     fantastic_key = os.environ.get("FANTASTIC_JOBS_API_KEY")
     if not fantastic_key:
@@ -133,15 +144,15 @@ def main():
     state = bs.load_state()
     already_judged_urls = set(state["jobs"].keys())
 
-    # Only discover/judge enough to fill this batch -- previously this
+    # Only discover/judge enough to fill search_size -- previously this
     # judged (and billed for) every board from stage 1 every run,
-    # regardless of --batch-size, since that flag only capped the
+    # regardless of any size flag, since that flag only capped the
     # folder-building step after judging, not judging itself. Any
     # judged_fit jobs already sitting unbatched from a previous run count
     # toward the total first, so this doesn't over-search when there's
     # already a backlog waiting.
     already_unbatched = len(bs.jobs_with_status(state, "judged_fit"))
-    still_needed = max(0, args.batch_size - already_unbatched)
+    still_needed = max(0, search_size - already_unbatched)
 
     if still_needed == 0:
         print(f"Already have {already_unbatched} judged_fit job(s) waiting -- skipping discovery/judging this run.")
