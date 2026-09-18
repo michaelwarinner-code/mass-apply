@@ -46,11 +46,34 @@ HARD_EXCLUDE = [
 # substring of "international"), which is a real title, not an internship.
 INTERN_PATTERN = re.compile(r"\bintern(ship)?\b", re.IGNORECASE)
 
+# Standalone "VP" anywhere in the title -- word-boundary, not the old
+# comma-specific "vp," entry in HARD_EXCLUDE (still there, harmless overlap),
+# which missed a real posting titled "VP Product Marketing - Global" (no
+# comma right after "VP") and let it through to the judge.
+VP_PATTERN = re.compile(r"\bvp\b", re.IGNORECASE)
+
+# "Senior" and "Manager" BOTH present, regardless of order/distance between
+# them -- deliberately blocks this combination even for a compound
+# functional title (e.g. "Senior Product Marketing Manager", "Senior
+# Customer Success Manager"), which the downstream Claude judge otherwise
+# treats as a legitimate IC title. This is a stricter, explicit override of
+# that nuance, not an oversight -- if a genuinely good compound-title role
+# ever gets missed because of this, that's the deliberate tradeoff being
+# made here.
+SENIOR_PATTERN = re.compile(r"\bsenior\b", re.IGNORECASE)
+MANAGER_PATTERN = re.compile(r"\bmanager\b", re.IGNORECASE)
+
 
 def passes_keyword_filter(title: str, company_key: str) -> bool:
     t = title.lower()
 
     if INTERN_PATTERN.search(t):
+        return False
+
+    if VP_PATTERN.search(t):
+        return False
+
+    if SENIOR_PATTERN.search(t) and MANAGER_PATTERN.search(t):
         return False
 
     if any(bad in t for bad in HARD_EXCLUDE):
