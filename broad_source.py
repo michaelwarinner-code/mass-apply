@@ -140,7 +140,9 @@ def discover_greenhouse_ashby_postings(api_key: str) -> list:
                 print(f"[broad-discovery] rate limited, retrying in {wait}s (attempt {attempt + 1}/{MAX_RETRIES})")
                 time.sleep(wait)
             else:
+                body = e.response.text[:500] if e.response is not None else "(no response body)"
                 print(f"[broad-discovery] search failed: {e}")
+                print(f"[broad-discovery] response body: {body}")
         except requests.RequestException as e:
             print(f"[broad-discovery] search failed: {e}")
             break
