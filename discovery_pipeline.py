@@ -11,14 +11,14 @@ from location_filter import is_us_location
 from nyc_location_filter import passes_nyc_location_filter
 from target_list_exclusion import is_target_list_company
 from claude_judge_broad import judge_fit_broad
-from software_company_cache import get_known_verdict, record_verdict
+from tech_company_cache import get_known_verdict, record_verdict
 
 
 def discover_and_judge(fantastic_key: str, profile: str, target_names: list,
                         already_judged_urls: set = None, limit: int = None, max_matches: int = None,
                         verbose: bool = True) -> tuple:
     """Returns (matches, rejects), each a list of dicts with company_name,
-    ats, board_token, title, url, description, match, is_software_company,
+    ats, board_token, title, url, description, match, is_tech_company,
     reason. already_judged_urls (from batch_state.json) is checked so a
     posting already judged in a past run never gets re-judged (and
     re-billed) here.
@@ -83,30 +83,30 @@ def discover_and_judge(fantastic_key: str, profile: str, target_names: list,
                     print(f"[{token}] judge failed for '{title}': {e}")
                 continue
 
-            # is_software_company is really a property of the COMPANY, not
+            # is_tech_company is really a property of the COMPANY, not
             # this one posting -- override the judge's fresh (per-posting)
             # guess with a known verdict if this company already has one
             # (manual override, or auto-learned from an earlier True
             # elsewhere), so the same company doesn't flip-flop across
             # different postings depending on how much product detail
             # each one's own text happens to include. role_and_years_ok
-            # (captured before the software gate in claude_judge_broad.py)
+            # (captured before the tech gate in claude_judge_broad.py)
             # lets match get recombined correctly here, rather than
             # guessing it from the reason text.
             known = get_known_verdict(company_name)
-            if known is not None and known != verdict["is_software_company"]:
+            if known is not None and known != verdict["is_tech_company"]:
                 if verbose:
-                    print(f"    [software-gate override] known verdict for {company_name} is "
-                          f"is_software_company={known}, overriding this posting's fresh guess of "
-                          f"{verdict['is_software_company']}")
-                verdict["is_software_company"] = known
+                    print(f"    [tech-gate override] known verdict for {company_name} is "
+                          f"is_tech_company={known}, overriding this posting's fresh guess of "
+                          f"{verdict['is_tech_company']}")
+                verdict["is_tech_company"] = known
                 verdict["match"] = known and verdict["role_and_years_ok"]
-                verdict["reason"] = verdict["reason"] + f" [software-gate corrected to {known} for {company_name}]"
-            record_verdict(company_name, verdict["is_software_company"])
+                verdict["reason"] = verdict["reason"] + f" [tech-gate corrected to {known} for {company_name}]"
+            record_verdict(company_name, verdict["is_tech_company"])
 
             if verbose:
                 print(f"  [{ats}] {company_name} -- {title}\n    match={verdict['match']} "
-                      f"software={verdict['is_software_company']} -- {verdict['reason']}")
+                      f"tech={verdict['is_tech_company']} -- {verdict['reason']}")
 
             record = {"company_name": company_name, "ats": ats, "board_token": token, "title": title,
                        "url": url, "description": job.get("description", ""), **verdict}

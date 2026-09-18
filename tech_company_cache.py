@@ -1,8 +1,8 @@
 """
-Per-company cache for the broad-discovery Claude judge's software-company
+Per-company cache for the broad-discovery Claude judge's tech-company
 gate (see claude_judge_broad.py). Confirmed necessary: the judge decides
-is_software_company FRESH from each individual posting's own text, with
-no memory of that same company's other postings -- since is_software_company
+is_tech_company FRESH from each individual posting's own text, with
+no memory of that same company's other postings -- since is_tech_company
 is really a property of the COMPANY, not any one posting, this caused the
 same company to get inconsistent verdicts across different postings
 depending on how much product detail that specific posting's text
@@ -10,10 +10,10 @@ happened to include (worse for a company whose name the aggregator
 mangles, e.g. "SpaceXAI" instead of "xAI").
 
 Two tiers, checked in this order:
-- Manual overrides (state/software_company_overrides.json) -- hand-edit
+- Manual overrides (state/tech_company_overrides.json) -- hand-edit
   this directly for a company you know for a fact is or isn't
-  software-core; always wins, checked before ever asking the judge.
-- Auto-learned cache (state/software_company_learned.json) -- once ANY
+  tech-core; always wins, checked before ever asking the judge.
+- Auto-learned cache (state/tech_company_learned.json) -- once ANY
   posting from a company gets a True verdict from the judge, that's
   trusted and applied to every OTHER posting from that same company too,
   this run and every future run. A False verdict is NEVER auto-learned
@@ -25,8 +25,8 @@ Two tiers, checked in this order:
 import json
 import os
 
-OVERRIDES_PATH = os.path.join(os.path.dirname(__file__), "state", "software_company_overrides.json")
-LEARNED_PATH = os.path.join(os.path.dirname(__file__), "state", "software_company_learned.json")
+OVERRIDES_PATH = os.path.join(os.path.dirname(__file__), "state", "tech_company_overrides.json")
+LEARNED_PATH = os.path.join(os.path.dirname(__file__), "state", "tech_company_learned.json")
 
 
 def _load(path: str) -> dict:
@@ -43,7 +43,7 @@ def _save(path: str, data: dict):
 
 
 def get_known_verdict(company_name: str):
-    """Returns True/False if this company's software-core status is
+    """Returns True/False if this company's tech-core status is
     already known (manual override wins over the learned cache), or None
     if it's never been resolved -- meaning the judge decides fresh this
     time, same as before this cache existed."""
@@ -56,10 +56,10 @@ def get_known_verdict(company_name: str):
     return None
 
 
-def record_verdict(company_name: str, is_software: bool):
+def record_verdict(company_name: str, is_tech: bool):
     """Only ever records a TRUE verdict -- see module docstring for why a
     lone False is never locked in this way."""
-    if not is_software:
+    if not is_tech:
         return
     learned = _load(LEARNED_PATH)
     if learned.get(company_name) is True:

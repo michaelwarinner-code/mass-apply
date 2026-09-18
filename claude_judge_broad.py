@@ -5,9 +5,10 @@ modifying judge_fit() directly, so the existing target-list pipeline's
 behavior can't regress from changes made for this new track.
 
 Adds one gate on top of the same role-fit logic used everywhere else: the
-company's CORE business must be software. A role being remote, tech-adjacent,
-or at a company that "uses" software doesn't qualify -- software has to be
-the actual product being sold.
+company's CORE business must be tech -- software, hardware, or a digital
+platform. A role being remote, tech-adjacent, or at a company that just
+"uses" technology internally doesn't qualify -- tech has to be the actual
+product/business being sold.
 """
 import json
 import os
@@ -23,7 +24,7 @@ def _strip_html(text: str) -> str:
 
 
 def judge_fit_broad(title: str, description: str, company_name: str, candidate_profile: str) -> dict:
-    """Returns {"match": bool, "is_software_company": bool, "reason": str}"""
+    """Returns {"match": bool, "is_tech_company": bool, "reason": str, "role_and_years_ok": bool}"""
     api_key = os.environ["MASSAPPLY_ANTHROPIC_API_KEY"]
     desc_text = _strip_html(description)[:8000]
 
@@ -33,7 +34,7 @@ def judge_fit_broad(title: str, description: str, company_name: str, candidate_p
         "auto-apply pool, so apply the SAME role-fit logic as always, plus one additional strict gate. "
         "Respond with ONLY a JSON object, no other text: "
         '{"stated_years_required": <number or null>, "match": true or false, '
-        '"is_software_company": true or false, "reason": "one short sentence"}. '
+        '"is_tech_company": true or false, "reason": "one short sentence"}. '
         "\n\nROLE FIT (apply exactly as usual): "
         "Some postings state a RANGE like '3-6 years' or '3-5+ years of experience.' For a range, the "
         "LOWEST number is the actual floor -- if the candidate meets or exceeds the low end, that's a "
@@ -58,21 +59,28 @@ def judge_fit_broad(title: str, description: str, company_name: str, candidate_p
         "management, or pure-creative/copywriting, per the candidate profile's explicit exclusions, "
         "even if other parts of the posting look like a fit. When genuinely uncertain on role fit, "
         "lean toward match=true."
-        "\n\nSOFTWARE-COMPANY GATE (new, strict -- applies ONLY to this track): "
-        "Classify whether the company's CORE product/business IS software -- SaaS, a software "
-        "platform, developer tools, or consumer/enterprise software as the primary thing the company "
-        "sells. This does NOT include companies where software supports the business but isn't the "
-        "product itself: retail, e-commerce, logistics, media/streaming content, consumer packaged "
-        "goods, restaurants, healthcare providers, financial services with a banking/lending core, "
-        "or any company primarily known for a physical product or non-software service -- even if that "
-        "company has a strong engineering org, a popular app, or the role itself is remote and tech-"
-        "adjacent. If you cannot confidently place the company as software-core from the company name "
-        "and posting content, set is_software_company to false rather than guessing yes -- do NOT lean "
-        "toward true the way you lean toward true on role fit; this gate is intentionally strict, not "
-        "generous. Base this on the company as a whole, not the specific team the role sits in."
+        "\n\nTECH-COMPANY GATE (strict -- applies ONLY to this track): "
+        "Classify whether the company's CORE product/business is TECH -- software (SaaS, developer "
+        "tools, consumer/enterprise software), hardware (devices, chips, robotics, physical tech "
+        "products as the actual thing sold), or a digital platform/marketplace where the platform "
+        "itself, not a physical good or traditional service, is the product. This DOES include AI/ML "
+        "companies, chip and semiconductor companies, robotics companies, and consumer hardware "
+        "companies, even if they also sell a physical object -- the test is whether TECH is the core "
+        "business, not whether the product is intangible. This does NOT include companies where "
+        "technology supports the business but isn't the product itself: retail, e-commerce (selling "
+        "physical goods through a website is not a tech company), logistics, media/streaming CONTENT "
+        "(the platform/service itself can still count, but a studio or content producer doesn't), "
+        "consumer packaged goods, restaurants, healthcare providers, financial services with a "
+        "banking/lending core, or any company primarily known for a non-tech physical product or "
+        "traditional service -- even if that company has a strong engineering org, a popular app, or "
+        "the role itself is remote and tech-adjacent. If you cannot confidently place the company as "
+        "tech-core from the company name and posting content, set is_tech_company to false rather than "
+        "guessing yes -- do NOT lean toward true the way you lean toward true on role fit; this gate is "
+        "intentionally strict, not generous. Base this on the company as a whole, not the specific team "
+        "the role sits in."
         "\n\nFor stated_years_required: report the correct binding floor number (low end for a range, "
         "high end for a compound requirement). If no years requirement is stated at all, use null. "
-        "The final \"match\" value must be false whenever is_software_company is false, regardless of "
+        "The final \"match\" value must be false whenever is_tech_company is false, regardless of "
         "how strong the role fit is."
     )
 
@@ -84,7 +92,7 @@ Company: {company_name}
 Title: {title}
 Description: {desc_text}
 
-Does this posting match the candidate's target roles and experience level, AND is the company's core business software?"""
+Does this posting match the candidate's target roles and experience level, AND is the company's core business tech (software, hardware, or a digital platform)?"""
 
     r = requests.post(
         API_URL,
@@ -118,30 +126,30 @@ Does this posting match the candidate's target roles and experience level, AND i
     try:
         parsed = json.loads(cleaned)
         stated_years = parsed.get("stated_years_required")
-        is_software = bool(parsed.get("is_software_company"))
+        is_tech = bool(parsed.get("is_tech_company"))
         match = bool(parsed.get("match"))
         reason = parsed.get("reason", "")
 
-        print(f"    [debug] stated_years_required={stated_years!r} | is_software_company={is_software} "
+        print(f"    [debug] stated_years_required={stated_years!r} | is_tech_company={is_tech} "
               f"| raw_match={parsed.get('match')}")
 
         if stated_years is not None and stated_years > 3:
             match = False
             reason = f"Requires {stated_years}+ years (exceeds 3-year threshold). {reason}"
 
-        # Captured BEFORE the software-company gate below, so a caller that
-        # later corrects is_software_company (e.g. software_company_cache.py,
+        # Captured BEFORE the tech-company gate below, so a caller that
+        # later corrects is_tech_company (e.g. tech_company_cache.py,
         # which trusts a known company-level verdict over this one
         # posting's fresh guess) can recombine match correctly without
         # having to reverse-engineer it from the reason text.
         role_and_years_ok = match
 
-        if not is_software:
+        if not is_tech:
             match = False
-            reason = f"Not a software-core company. {reason}"
+            reason = f"Not a tech-core company. {reason}"
 
-        return {"match": match, "is_software_company": is_software, "reason": reason,
+        return {"match": match, "is_tech_company": is_tech, "reason": reason,
                 "role_and_years_ok": role_and_years_ok}
     except (json.JSONDecodeError, ValueError):
-        return {"match": False, "is_software_company": False, "reason": f"unparsed model output: {text[:200]}",
+        return {"match": False, "is_tech_company": False, "reason": f"unparsed model output: {text[:200]}",
                  "role_and_years_ok": False}
