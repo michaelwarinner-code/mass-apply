@@ -5,6 +5,7 @@ This filter's only job is to reject postings from CLEARLY unrelated departments
 NOT try to judge fit precisely. The real nuance (seniority, stretch-ability, whether it's
 the right flavor of marketing/sales) is Claude's job downstream, not this filter's.
 """
+import re
 
 POSITIVE_SIGNALS = [
     "product marketing", "growth marketing", "performance marketing",
@@ -40,9 +41,17 @@ HARD_EXCLUDE = [
     "human factors", "supply chain", "logistics coordinator", "chief"
 ]
 
+# Word-boundary, not substring -- a plain "intern" in HARD_EXCLUDE above would
+# also reject "International Marketing Manager" (contains "intern" as a
+# substring of "international"), which is a real title, not an internship.
+INTERN_PATTERN = re.compile(r"\bintern(ship)?\b", re.IGNORECASE)
+
 
 def passes_keyword_filter(title: str, company_key: str) -> bool:
     t = title.lower()
+
+    if INTERN_PATTERN.search(t):
+        return False
 
     if any(bad in t for bad in HARD_EXCLUDE):
         return False
