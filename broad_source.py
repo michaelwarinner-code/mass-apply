@@ -50,6 +50,9 @@ SEARCH_KEYWORDS = [
     "growth marketing", "product marketing", "performance marketing",
     "demand generation", "revenue operations", "lifecycle marketing",
     "go-to-market marketing", "growth strategist", "marketing analyst",
+    "early career marketing", "customer success", "sales manager",
+    "gtm engineer", "growth operations", "marketing operations",
+    "account executive", "marketing coordinator",
 ]
 
 
@@ -81,14 +84,28 @@ def _search_fantastic_jobs(title_query: str, api_key: str) -> dict:
     params = {
         "title": title_query,
         "location": '"United States"',
-        "time_frame": "7d",
+        "time_frame": "21d",
         "limit": 500,
         "offset": 0,
         "description_format": "text",
     }
     r = requests.get(FANTASTIC_URL, headers=headers, params=params, timeout=TIMEOUT)
     r.raise_for_status()
-    return r.json()
+    data = r.json()
+    # No pagination here on purpose -- fetching more than one page would
+    # mean more than one Fantastic Jobs call per run, which defeats the
+    # whole point of the search-size/batch-size split (spend ONE call,
+    # build a backlog from it). This just warns loudly if the raw result
+    # count looks like it hit the 500 cap, since a wider keyword list and
+    # a longer time_frame (both increased together) raise real odds of
+    # silently losing postings past the cap with no error at all.
+    raw_count = len(data if isinstance(data, list) else data.get("jobs", []))
+    if raw_count >= 500:
+        print(f"[broad-discovery] WARNING: got {raw_count} raw results -- this may be hitting the "
+              f"500-per-request cap, meaning some real postings could be silently missing. Consider "
+              f"narrowing time_frame or splitting SEARCH_KEYWORDS across more than one call if this "
+              f"keeps happening.")
+    return data
 
 
 def _build_combined_title_query() -> str:
