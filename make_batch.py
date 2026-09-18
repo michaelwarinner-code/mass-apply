@@ -88,12 +88,12 @@ def process_one_job(job: dict, batch_dir: str, candidate_info: dict, bank_entrie
         if has_separate_upload_slots(fields):
             print("  Building separate resume + cover letter PDFs...")
             resume_pdf, cl_pdf = build_resume_and_coverletter(resume_data, coverletter_data, job_dir)
-            os.rename(resume_pdf, os.path.join(job_dir, f"{folder_name} - Resume.pdf"))
-            os.rename(cl_pdf, os.path.join(job_dir, f"{folder_name} - Cover Letter.pdf"))
+            os.rename(resume_pdf, os.path.join(job_dir, "michael_warinner_resume.pdf"))
+            os.rename(cl_pdf, os.path.join(job_dir, "michael_warinner_cover_letter.pdf"))
         else:
             print("  Only one upload slot found -- building ONE combined PDF (cover letter pg 1, resume pg 2)...")
             combined_pdf = build_combined_resume_coverletter(resume_data, coverletter_data, job_dir)
-            os.rename(combined_pdf, os.path.join(job_dir, f"{folder_name} - Combined.pdf"))
+            os.rename(combined_pdf, os.path.join(job_dir, "michael_warinner_resume_cover_letter.pdf"))
     except Exception as e:
         print(f"  PDF build FAILED: {e}")
         return False
