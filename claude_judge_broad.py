@@ -129,10 +129,19 @@ Does this posting match the candidate's target roles and experience level, AND i
             match = False
             reason = f"Requires {stated_years}+ years (exceeds 3-year threshold). {reason}"
 
+        # Captured BEFORE the software-company gate below, so a caller that
+        # later corrects is_software_company (e.g. software_company_cache.py,
+        # which trusts a known company-level verdict over this one
+        # posting's fresh guess) can recombine match correctly without
+        # having to reverse-engineer it from the reason text.
+        role_and_years_ok = match
+
         if not is_software:
             match = False
             reason = f"Not a software-core company. {reason}"
 
-        return {"match": match, "is_software_company": is_software, "reason": reason}
+        return {"match": match, "is_software_company": is_software, "reason": reason,
+                "role_and_years_ok": role_and_years_ok}
     except (json.JSONDecodeError, ValueError):
-        return {"match": False, "is_software_company": False, "reason": f"unparsed model output: {text[:200]}"}
+        return {"match": False, "is_software_company": False, "reason": f"unparsed model output: {text[:200]}",
+                 "role_and_years_ok": False}
