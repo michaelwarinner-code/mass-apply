@@ -127,6 +127,14 @@ def main():
                               "once there's enough judged_fit backlog, later runs skip discovery "
                               "entirely and cost zero further Fantastic Jobs calls. Defaults to "
                               "--batch-size if not given (the original single-purpose behavior).")
+    parser.add_argument("--board-limit", type=int, default=None,
+                         help="Caps how many unique company boards get checked this run, regardless of "
+                              "how many matches --search-size is still looking for. --search-size only "
+                              "stops EARLY once enough matches are found -- if genuine matches are rare, "
+                              "it keeps judging every posting from every board found until it runs out, "
+                              "which can mean hundreds of real Claude API calls for a high --search-size "
+                              "with a low match rate. This is the real ceiling on that cost. Unset means "
+                              "no cap (checks every board discovery returned).")
     args = parser.parse_args()
     search_size = args.search_size if args.search_size is not None else args.batch_size
 
@@ -160,7 +168,8 @@ def main():
     else:
         print(f"Discovering + judging new postings (stopping once {still_needed} new match(es) are found)...")
         matches, rejects = discover_and_judge(fantastic_key, profile, target_names,
-                                               already_judged_urls=already_judged_urls, max_matches=still_needed)
+                                               already_judged_urls=already_judged_urls, max_matches=still_needed,
+                                               limit=args.board_limit)
     for m in matches:
         bs.set_job_status(state, m["url"], "judged_fit", company_name=m["company_name"], title=m["title"],
                            url=m["url"], ats=m["ats"], board_token=m["board_token"])
