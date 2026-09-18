@@ -84,7 +84,7 @@ def _search_fantastic_jobs(title_query: str, api_key: str) -> dict:
     params = {
         "title": title_query,
         "location": '"United States"',
-        "time_frame": "21d",
+        "time_frame": "7d",
         "limit": 500,
         "offset": 0,
         "description_format": "text",
