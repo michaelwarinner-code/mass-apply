@@ -1,0 +1,876 @@
+{
+  "jobs": {
+    "https://job-boards.greenhouse.io/xai/jobs/5238756007": {
+      "status": "in_batch",
+      "first_seen": "2026-09-17T22:32:47.924633+00:00",
+      "last_updated": "2026-09-17T22:34:29.533922+00:00",
+      "batch_folder": "batches\\2026-09-17"
+    },
+    "https://ats.comparably.com/api/v1/gh/contentstack/jobs/7980942003?gh_jid=7980942003": {
+      "status": "judged_reject",
+      "first_seen": "2026-09-17T22:32:47.924689+00:00",
+      "last_updated": "2026-09-17T22:32:47.924696+00:00",
+      "company_name": "Contentstack",
+      "title": "Sr. Customer Success Manager",
+      "url": "https://ats.comparably.com/api/v1/gh/contentstack/jobs/7980942003?gh_jid=7980942003",
+      "ats": "greenhouse",
+      "board_token": "contentstack"
+    },
+    "https://ats.comparably.com/api/v1/gh/contentstack/jobs/7989312003?gh_jid=7989312003": {
+      "status": "judged_reject",
+      "first_seen": "2026-09-17T22:32:47.924710+00:00",
+      "last_updated": "2026-09-17T22:32:47.924716+00:00",
+      "company_name": "Contentstack",
+      "title": "Sr. Product Marketing Manager, Content Cloud",
+      "url": "https://ats.comparably.com/api/v1/gh/contentstack/jobs/7989312003?gh_jid=7989312003",
+      "ats": "greenhouse",
+      "board_token": "contentstack"
+    },
+    "https://job-boards.greenhouse.io/xai/jobs/4940377007": {
+      "status": "judged_reject",
+      "first_seen": "2026-09-17T22:32:47.924725+00:00",
+      "last_updated": "2026-09-17T22:32:47.924730+00:00",
+      "company_name": "SpaceXAI",
+      "title": "Client Account Manager",
+      "url": "https://job-boards.greenhouse.io/xai/jobs/4940377007",
+      "ats": "greenhouse",
+      "board_token": "xai"
+    },
+    "https://job-boards.greenhouse.io/xai/jobs/5221126007": {
+      "status": "judged_reject",
+      "first_seen": "2026-09-17T22:32:47.924737+00:00",
+      "last_updated": "2026-09-17T22:32:47.924742+00:00",
+      "company_name": "SpaceXAI",
+      "title": "Client Account Manager- SMB",
+      "url": "https://job-boards.greenhouse.io/xai/jobs/5221126007",
+      "ats": "greenhouse",
+      "board_token": "xai"
+    },
+    "https://job-boards.greenhouse.io/xai/jobs/5205848007": {
+      "status": "judged_reject",
+      "first_seen": "2026-09-17T22:32:47.924751+00:00",
+      "last_updated": "2026-09-17T22:32:47.924756+00:00",
+      "company_name": "SpaceXAI",
+      "title": "Client Partner",
+      "url": "https://job-boards.greenhouse.io/xai/jobs/5205848007",
+      "ats": "greenhouse",
+      "board_token": "xai"
+    },
+    "https://job-boards.greenhouse.io/xai/jobs/5239924007": {
+      "status": "judged_reject",
+      "first_seen": "2026-09-17T22:32:47.924766+00:00",
+      "last_updated": "2026-09-17T22:32:47.924771+00:00",
+      "company_name": "SpaceXAI",
+      "title": "Director of Growth Marketing and Sales Enablement",
+      "url": "https://job-boards.greenhouse.io/xai/jobs/5239924007",
+      "ats": "greenhouse",
+      "board_token": "xai"
+    },
+    "https://job-boards.greenhouse.io/gitlab/jobs/8808115002": {
+      "status": "in_batch",
+      "first_seen": "2026-09-17T22:41:12.675936+00:00",
+      "last_updated": "2026-09-17T22:42:35.647463+00:00",
+      "batch_folder": "batches\\2026-09-17"
+    },
+    "https://stackoverflow.co/company/careers/8208232?gh_jid=8208232": {
+      "status": "judged_reject",
+      "first_seen": "2026-09-17T22:41:12.675965+00:00",
+      "last_updated": "2026-09-17T22:41:12.675968+00:00",
+      "company_name": "Stack Overflow",
+      "title": "Sr Manager, Revenue Operations",
+      "url": "https://stackoverflow.co/company/careers/8208232?gh_jid=8208232",
+      "ats": "greenhouse",
+      "board_token": "stackexchange"
+    },
+    "https://job-boards.greenhouse.io/blinkhealth/jobs/8816230002": {
+      "status": "judged_reject",
+      "first_seen": "2026-09-17T22:41:12.675976+00:00",
+      "last_updated": "2026-09-17T22:41:12.675979+00:00",
+      "company_name": "Blink Health",
+      "title": "Senior Growth Marketing Manager (Pharma & HCP)",
+      "url": "https://job-boards.greenhouse.io/blinkhealth/jobs/8816230002",
+      "ats": "greenhouse",
+      "board_token": "blinkhealth"
+    },
+    "https://job-boards.greenhouse.io/blinkhealth/jobs/8733192002": {
+      "status": "judged_reject",
+      "first_seen": "2026-09-17T22:41:12.675983+00:00",
+      "last_updated": "2026-09-17T22:41:12.675986+00:00",
+      "company_name": "Blink Health",
+      "title": "Trainer, Growth Programs",
+      "url": "https://job-boards.greenhouse.io/blinkhealth/jobs/8733192002",
+      "ats": "greenhouse",
+      "board_token": "blinkhealth"
+    },
+    "https://job-boards.greenhouse.io/assetwatch/jobs/4729654005": {
+      "status": "judged_reject",
+      "first_seen": "2026-09-17T22:41:12.675990+00:00",
+      "last_updated": "2026-09-17T22:41:12.675992+00:00",
+      "company_name": "AssetWatch, Inc.",
+      "title": "Field & Partner Marketing Manager",
+      "url": "https://job-boards.greenhouse.io/assetwatch/jobs/4729654005",
+      "ats": "greenhouse",
+      "board_token": "assetwatch"
+    },
+    "https://job-boards.greenhouse.io/assetwatch/jobs/4699524005": {
+      "status": "judged_reject",
+      "first_seen": "2026-09-17T22:41:12.675996+00:00",
+      "last_updated": "2026-09-17T22:41:12.675999+00:00",
+      "company_name": "AssetWatch, Inc.",
+      "title": "Strategic Marketing Programs Manager",
+      "url": "https://job-boards.greenhouse.io/assetwatch/jobs/4699524005",
+      "ats": "greenhouse",
+      "board_token": "assetwatch"
+    },
+    "https://jobs.ashbyhq.com/avarra/bc23e231-800c-49df-ab1c-7faf1f75ffd7": {
+      "status": "judged_reject",
+      "first_seen": "2026-09-17T22:41:12.676003+00:00",
+      "last_updated": "2026-09-17T22:41:12.676005+00:00",
+      "company_name": "Avarra",
+      "title": "Social Media and Customer Marketing Manager",
+      "url": "https://jobs.ashbyhq.com/avarra/bc23e231-800c-49df-ab1c-7faf1f75ffd7",
+      "ats": "ashby",
+      "board_token": "avarra"
+    },
+    "https://jobs.ashbyhq.com/avarra/779d17b2-1981-433e-abfa-376e88413cde": {
+      "status": "judged_reject",
+      "first_seen": "2026-09-17T22:41:12.676009+00:00",
+      "last_updated": "2026-09-17T22:41:12.676012+00:00",
+      "company_name": "Avarra",
+      "title": "Senior Demand Generation Manager",
+      "url": "https://jobs.ashbyhq.com/avarra/779d17b2-1981-433e-abfa-376e88413cde",
+      "ats": "ashby",
+      "board_token": "avarra"
+    },
+    "https://jobs.ashbyhq.com/Clera/0df0bda2-f04c-40c8-8968-3d94dd240a88": {
+      "status": "judged_reject",
+      "first_seen": "2026-09-17T22:41:12.676016+00:00",
+      "last_updated": "2026-09-17T22:41:12.676018+00:00",
+      "company_name": "Clera",
+      "title": "Content Marketing Manager",
+      "url": "https://jobs.ashbyhq.com/Clera/0df0bda2-f04c-40c8-8968-3d94dd240a88",
+      "ats": "ashby",
+      "board_token": "Clera"
+    },
+    "https://jobs.ashbyhq.com/Clera/2999eb31-a6f7-42c4-8d31-bc2d0cf658ff": {
+      "status": "judged_reject",
+      "first_seen": "2026-09-17T22:41:12.676022+00:00",
+      "last_updated": "2026-09-17T22:41:12.676024+00:00",
+      "company_name": "Clera",
+      "title": "Account Executive",
+      "url": "https://jobs.ashbyhq.com/Clera/2999eb31-a6f7-42c4-8d31-bc2d0cf658ff",
+      "ats": "ashby",
+      "board_token": "Clera"
+    },
+    "https://jobs.ashbyhq.com/Clera/84f6977e-3f18-403d-b264-c1b3a0f24330": {
+      "status": "judged_reject",
+      "first_seen": "2026-09-17T22:41:12.676028+00:00",
+      "last_updated": "2026-09-17T22:41:12.676031+00:00",
+      "company_name": "Clera",
+      "title": "Founding Account Executive (US)",
+      "url": "https://jobs.ashbyhq.com/Clera/84f6977e-3f18-403d-b264-c1b3a0f24330",
+      "ats": "ashby",
+      "board_token": "Clera"
+    },
+    "https://jobs.ashbyhq.com/Clera/2336d5ec-c07c-4a55-a987-027f28a2d7fb": {
+      "status": "judged_reject",
+      "first_seen": "2026-09-17T22:41:12.676034+00:00",
+      "last_updated": "2026-09-17T22:41:12.676037+00:00",
+      "company_name": "Clera",
+      "title": "Sales Development Representative",
+      "url": "https://jobs.ashbyhq.com/Clera/2336d5ec-c07c-4a55-a987-027f28a2d7fb",
+      "ats": "ashby",
+      "board_token": "Clera"
+    },
+    "https://jobs.ashbyhq.com/Clera/0bbabda8-af14-4c66-bd88-d73629c4a86e": {
+      "status": "judged_reject",
+      "first_seen": "2026-09-17T22:41:12.676041+00:00",
+      "last_updated": "2026-09-17T22:41:12.676043+00:00",
+      "company_name": "Clera",
+      "title": "Growth Marketing Lead",
+      "url": "https://jobs.ashbyhq.com/Clera/0bbabda8-af14-4c66-bd88-d73629c4a86e",
+      "ats": "ashby",
+      "board_token": "Clera"
+    },
+    "https://jobs.ashbyhq.com/Clera/f31bf580-8e56-45eb-bc25-3af64bf569a8": {
+      "status": "judged_reject",
+      "first_seen": "2026-09-17T22:41:12.676048+00:00",
+      "last_updated": "2026-09-17T22:41:12.676050+00:00",
+      "company_name": "Clera",
+      "title": "Founding Account Executive",
+      "url": "https://jobs.ashbyhq.com/Clera/f31bf580-8e56-45eb-bc25-3af64bf569a8",
+      "ats": "ashby",
+      "board_token": "Clera"
+    },
+    "https://jobs.ashbyhq.com/coderabbit/6ce16f52-729d-4342-9088-3f89904b2d3b": {
+      "status": "judged_reject",
+      "first_seen": "2026-09-17T22:41:12.676054+00:00",
+      "last_updated": "2026-09-17T22:41:12.676056+00:00",
+      "company_name": "CodeRabbit",
+      "title": "Enterprise Field Engineer, Pre Sales - New York",
+      "url": "https://jobs.ashbyhq.com/coderabbit/6ce16f52-729d-4342-9088-3f89904b2d3b",
+      "ats": "ashby",
+      "board_token": "coderabbit"
+    },
+    "https://jobs.ashbyhq.com/coderabbit/f9d10281-f7c2-47aa-82cf-dbb0dfc005dd": {
+      "status": "judged_reject",
+      "first_seen": "2026-09-17T22:41:12.676062+00:00",
+      "last_updated": "2026-09-17T22:41:12.676064+00:00",
+      "company_name": "CodeRabbit",
+      "title": "Enterprise Account Executive - Northeast",
+      "url": "https://jobs.ashbyhq.com/coderabbit/f9d10281-f7c2-47aa-82cf-dbb0dfc005dd",
+      "ats": "ashby",
+      "board_token": "coderabbit"
+    },
+    "https://jobs.ashbyhq.com/coderabbit/4fcfb7bd-6089-4335-8099-de493f607876": {
+      "status": "judged_reject",
+      "first_seen": "2026-09-17T22:41:12.676071+00:00",
+      "last_updated": "2026-09-17T22:41:12.676074+00:00",
+      "company_name": "CodeRabbit",
+      "title": "Account Executive, Enterprise - Southeast",
+      "url": "https://jobs.ashbyhq.com/coderabbit/4fcfb7bd-6089-4335-8099-de493f607876",
+      "ats": "ashby",
+      "board_token": "coderabbit"
+    },
+    "https://jobs.ashbyhq.com/coderabbit/30211761-b044-4bce-991f-16bf3b5771bd": {
+      "status": "judged_reject",
+      "first_seen": "2026-09-17T22:41:12.676081+00:00",
+      "last_updated": "2026-09-17T22:41:12.676085+00:00",
+      "company_name": "CodeRabbit",
+      "title": "Enterprise Field Engineer - Pre-sales - SouthEast (Atlanta) ",
+      "url": "https://jobs.ashbyhq.com/coderabbit/30211761-b044-4bce-991f-16bf3b5771bd",
+      "ats": "ashby",
+      "board_token": "coderabbit"
+    },
+    "https://jobs.ashbyhq.com/foley/8c44dc05-40d4-4ca9-9324-929135dc2c7f": {
+      "status": "judged_reject",
+      "first_seen": "2026-09-17T22:41:12.676089+00:00",
+      "last_updated": "2026-09-17T22:41:12.676092+00:00",
+      "company_name": "Foley",
+      "title": "Inside Sales Representative, Small Market",
+      "url": "https://jobs.ashbyhq.com/foley/8c44dc05-40d4-4ca9-9324-929135dc2c7f",
+      "ats": "ashby",
+      "board_token": "foley"
+    },
+    "https://job-boards.greenhouse.io/planetlabs/jobs/8079178": {
+      "status": "judged_reject",
+      "first_seen": "2026-09-17T22:41:12.676097+00:00",
+      "last_updated": "2026-09-17T22:41:12.676101+00:00",
+      "company_name": "Planet",
+      "title": "Industry Account Executive, United States",
+      "url": "https://job-boards.greenhouse.io/planetlabs/jobs/8079178",
+      "ats": "greenhouse",
+      "board_token": "planetlabs"
+    },
+    "https://job-boards.greenhouse.io/amplitude/jobs/8796474002": {
+      "status": "judged_reject",
+      "first_seen": "2026-09-17T22:41:12.676107+00:00",
+      "last_updated": "2026-09-17T22:41:12.676110+00:00",
+      "company_name": "Amplitude",
+      "title": "Sales Development Representative",
+      "url": "https://job-boards.greenhouse.io/amplitude/jobs/8796474002",
+      "ats": "greenhouse",
+      "board_token": "amplitude"
+    },
+    "https://job-boards.greenhouse.io/amplitude/jobs/8623085002": {
+      "status": "judged_reject",
+      "first_seen": "2026-09-17T22:41:12.676116+00:00",
+      "last_updated": "2026-09-17T22:41:12.676120+00:00",
+      "company_name": "Amplitude",
+      "title": "Senior Sales Engineer - Enterprise",
+      "url": "https://job-boards.greenhouse.io/amplitude/jobs/8623085002",
+      "ats": "greenhouse",
+      "board_token": "amplitude"
+    },
+    "https://job-boards.greenhouse.io/amplitude/jobs/8572134002": {
+      "status": "judged_reject",
+      "first_seen": "2026-09-17T22:41:12.676126+00:00",
+      "last_updated": "2026-09-17T22:41:12.676129+00:00",
+      "company_name": "Amplitude",
+      "title": "Strategic Account Executive",
+      "url": "https://job-boards.greenhouse.io/amplitude/jobs/8572134002",
+      "ats": "greenhouse",
+      "board_token": "amplitude"
+    },
+    "https://job-boards.greenhouse.io/amplitude/jobs/8593702002": {
+      "status": "judged_reject",
+      "first_seen": "2026-09-17T22:41:12.676135+00:00",
+      "last_updated": "2026-09-17T22:41:12.676138+00:00",
+      "company_name": "Amplitude",
+      "title": "Strategic Account Executive",
+      "url": "https://job-boards.greenhouse.io/amplitude/jobs/8593702002",
+      "ats": "greenhouse",
+      "board_token": "amplitude"
+    },
+    "https://boards.greenhouse.io/faire/jobs/8701242002?gh_jid=8701242002": {
+      "status": "in_batch",
+      "first_seen": "2026-09-18T16:47:43.212972+00:00",
+      "last_updated": "2026-09-18T16:50:25.338838+00:00",
+      "batch_folder": "batches\\2026-09-18"
+    },
+    "https://jobs.ashbyhq.com/eliseai/1f59c180-e4e0-4c35-a5e8-37eff6fa4910": {
+      "status": "in_batch",
+      "first_seen": "2026-09-18T16:47:43.213054+00:00",
+      "last_updated": "2026-09-18T16:51:45.362620+00:00",
+      "batch_folder": "batches\\2026-09-18"
+    },
+    "https://jobs.ashbyhq.com/eliseai/7ff38370-865b-4c0a-802f-235bd87a74c3": {
+      "status": "in_batch",
+      "first_seen": "2026-09-18T16:47:43.213085+00:00",
+      "last_updated": "2026-09-18T16:52:47.442785+00:00",
+      "batch_folder": "batches\\2026-09-18"
+    },
+    "https://jobs.ashbyhq.com/eliseai/02374e9f-e8dd-4afb-83f1-dc95b6188fc1": {
+      "status": "in_batch",
+      "first_seen": "2026-09-18T16:47:43.213112+00:00",
+      "last_updated": "2026-09-18T16:54:11.782242+00:00",
+      "batch_folder": "batches\\2026-09-18"
+    },
+    "https://jobs.ashbyhq.com/eliseai/ff53b687-1943-4f54-9d09-66098c20db1a": {
+      "status": "in_batch",
+      "first_seen": "2026-09-18T16:47:43.213137+00:00",
+      "last_updated": "2026-09-18T16:55:32.842547+00:00",
+      "batch_folder": "batches\\2026-09-18"
+    },
+    "https://job-boards.greenhouse.io/eulerity/jobs/4708258006": {
+      "status": "in_batch",
+      "first_seen": "2026-09-18T16:47:43.213164+00:00",
+      "last_updated": "2026-09-18T16:57:03.667982+00:00",
+      "batch_folder": "batches\\2026-09-18"
+    },
+    "https://job-boards.greenhouse.io/eulerity/jobs/4707585006": {
+      "status": "in_batch",
+      "first_seen": "2026-09-18T16:47:43.213189+00:00",
+      "last_updated": "2026-09-18T16:58:11.964152+00:00",
+      "batch_folder": "batches\\2026-09-18"
+    },
+    "https://jobs.ashbyhq.com/Acorns/f221bf93-f4e3-41cd-9beb-c745bf8c0123": {
+      "status": "in_batch",
+      "first_seen": "2026-09-18T16:47:43.213213+00:00",
+      "last_updated": "2026-09-18T16:59:15.070929+00:00",
+      "batch_folder": "batches\\2026-09-18"
+    },
+    "https://jobs.ashbyhq.com/Acorns/7bbbdcf6-7301-4440-8a19-60d9d633d1ea": {
+      "status": "in_batch",
+      "first_seen": "2026-09-18T16:47:43.213235+00:00",
+      "last_updated": "2026-09-18T17:00:21.079512+00:00",
+      "batch_folder": "batches\\2026-09-18"
+    },
+    "https://jobs.ashbyhq.com/grow-therapy/8d0be304-d798-4685-af39-592361468a64": {
+      "status": "in_batch",
+      "first_seen": "2026-09-18T16:47:43.213422+00:00",
+      "last_updated": "2026-09-18T17:01:41.270709+00:00",
+      "batch_folder": "batches\\2026-09-18"
+    },
+    "https://boards.greenhouse.io/faire/jobs/8818108002?gh_jid=8818108002": {
+      "status": "judged_reject",
+      "first_seen": "2026-09-18T16:47:43.213450+00:00",
+      "last_updated": "2026-09-18T16:47:43.213459+00:00",
+      "company_name": "Faire",
+      "title": "Growth Platform, Marketing Engineer",
+      "url": "https://boards.greenhouse.io/faire/jobs/8818108002?gh_jid=8818108002",
+      "ats": "greenhouse",
+      "board_token": "faire"
+    },
+    "https://boards.greenhouse.io/faire/jobs/8820806002?gh_jid=8820806002": {
+      "status": "judged_reject",
+      "first_seen": "2026-09-18T16:47:43.213477+00:00",
+      "last_updated": "2026-09-18T16:47:43.213486+00:00",
+      "company_name": "Faire",
+      "title": "Senior Product Marketing Manager",
+      "url": "https://boards.greenhouse.io/faire/jobs/8820806002?gh_jid=8820806002",
+      "ats": "greenhouse",
+      "board_token": "faire"
+    },
+    "https://boards.greenhouse.io/faire/jobs/8633365002?gh_jid=8633365002": {
+      "status": "judged_reject",
+      "first_seen": "2026-09-18T16:47:43.213507+00:00",
+      "last_updated": "2026-09-18T16:47:43.213517+00:00",
+      "company_name": "Faire",
+      "title": "Strategic Finance Senior Lead, Growth",
+      "url": "https://boards.greenhouse.io/faire/jobs/8633365002?gh_jid=8633365002",
+      "ats": "greenhouse",
+      "board_token": "faire"
+    },
+    "https://jobs.ashbyhq.com/eliseai/09e616d7-172b-46d9-929d-0932e8a31bc4": {
+      "status": "judged_reject",
+      "first_seen": "2026-09-18T16:47:43.213532+00:00",
+      "last_updated": "2026-09-18T16:47:43.213543+00:00",
+      "company_name": "EliseAI",
+      "title": "GTM Product Enablement Manager | Housing",
+      "url": "https://jobs.ashbyhq.com/eliseai/09e616d7-172b-46d9-929d-0932e8a31bc4",
+      "ats": "ashby",
+      "board_token": "eliseai"
+    },
+    "https://jobs.ashbyhq.com/eliseai/8b33cb13-0441-4d6e-887c-e8ce18ba98aa": {
+      "status": "judged_reject",
+      "first_seen": "2026-09-18T16:47:43.213557+00:00",
+      "last_updated": "2026-09-18T16:47:43.213566+00:00",
+      "company_name": "EliseAI",
+      "title": "GTM Enablement Program Manager | Housing",
+      "url": "https://jobs.ashbyhq.com/eliseai/8b33cb13-0441-4d6e-887c-e8ce18ba98aa",
+      "ats": "ashby",
+      "board_token": "eliseai"
+    },
+    "https://jobs.ashbyhq.com/eliseai/030ce0cc-8242-49da-8a19-fd2f8ded3437": {
+      "status": "judged_reject",
+      "first_seen": "2026-09-18T16:47:43.213581+00:00",
+      "last_updated": "2026-09-18T16:47:43.213591+00:00",
+      "company_name": "EliseAI",
+      "title": "Sales Development Representative | Housing",
+      "url": "https://jobs.ashbyhq.com/eliseai/030ce0cc-8242-49da-8a19-fd2f8ded3437",
+      "ats": "ashby",
+      "board_token": "eliseai"
+    },
+    "https://jobs.ashbyhq.com/eliseai/85c00ebc-7d74-4f63-bebd-ed1dfdf0b442": {
+      "status": "judged_reject",
+      "first_seen": "2026-09-18T16:47:43.213606+00:00",
+      "last_updated": "2026-09-18T16:47:43.213615+00:00",
+      "company_name": "EliseAI",
+      "title": "Mid-Market Account Executive | Housing",
+      "url": "https://jobs.ashbyhq.com/eliseai/85c00ebc-7d74-4f63-bebd-ed1dfdf0b442",
+      "ats": "ashby",
+      "board_token": "eliseai"
+    },
+    "https://jobs.ashbyhq.com/eliseai/d64ad5f1-7266-4b94-bf99-fd4ab5f18693": {
+      "status": "judged_reject",
+      "first_seen": "2026-09-18T16:47:43.213631+00:00",
+      "last_updated": "2026-09-18T16:47:43.213640+00:00",
+      "company_name": "EliseAI",
+      "title": "Enterprise Account Executive | Housing",
+      "url": "https://jobs.ashbyhq.com/eliseai/d64ad5f1-7266-4b94-bf99-fd4ab5f18693",
+      "ats": "ashby",
+      "board_token": "eliseai"
+    },
+    "https://jobs.ashbyhq.com/eliseai/438964d6-cc25-436e-901b-42ec3ffbc2d3": {
+      "status": "judged_reject",
+      "first_seen": "2026-09-18T16:47:43.213654+00:00",
+      "last_updated": "2026-09-18T16:47:43.213663+00:00",
+      "company_name": "EliseAI",
+      "title": "Sales Development Representative | Healthcare",
+      "url": "https://jobs.ashbyhq.com/eliseai/438964d6-cc25-436e-901b-42ec3ffbc2d3",
+      "ats": "ashby",
+      "board_token": "eliseai"
+    },
+    "https://jobs.ashbyhq.com/eliseai/69f2e143-9181-4e1f-b18f-ee684e8e525d": {
+      "status": "judged_reject",
+      "first_seen": "2026-09-18T16:47:43.213703+00:00",
+      "last_updated": "2026-09-18T16:47:43.213716+00:00",
+      "company_name": "EliseAI",
+      "title": "Sales Development Manager | Healthcare",
+      "url": "https://jobs.ashbyhq.com/eliseai/69f2e143-9181-4e1f-b18f-ee684e8e525d",
+      "ats": "ashby",
+      "board_token": "eliseai"
+    },
+    "https://jobs.ashbyhq.com/eliseai/4ec9e29c-1281-44d4-8b4c-2ad1c52e7b33": {
+      "status": "judged_reject",
+      "first_seen": "2026-09-18T16:47:43.213732+00:00",
+      "last_updated": "2026-09-18T16:47:43.213741+00:00",
+      "company_name": "EliseAI",
+      "title": "Strategic Account Executive | Housing",
+      "url": "https://jobs.ashbyhq.com/eliseai/4ec9e29c-1281-44d4-8b4c-2ad1c52e7b33",
+      "ats": "ashby",
+      "board_token": "eliseai"
+    },
+    "https://jobs.ashbyhq.com/eliseai/91bfa853-fb7a-461f-a02f-76804fdc7083": {
+      "status": "judged_reject",
+      "first_seen": "2026-09-18T16:47:43.213755+00:00",
+      "last_updated": "2026-09-18T16:47:43.213764+00:00",
+      "company_name": "EliseAI",
+      "title": "GTM Strategy and Operations Manager / Senior Manager  | Housing",
+      "url": "https://jobs.ashbyhq.com/eliseai/91bfa853-fb7a-461f-a02f-76804fdc7083",
+      "ats": "ashby",
+      "board_token": "eliseai"
+    },
+    "https://jobs.ashbyhq.com/eliseai/65b1db32-1ff5-4ce7-b546-3a4c2df9ad2c": {
+      "status": "judged_reject",
+      "first_seen": "2026-09-18T16:47:43.213778+00:00",
+      "last_updated": "2026-09-18T16:47:43.213787+00:00",
+      "company_name": "EliseAI",
+      "title": "Customer Success Manager | Housing",
+      "url": "https://jobs.ashbyhq.com/eliseai/65b1db32-1ff5-4ce7-b546-3a4c2df9ad2c",
+      "ats": "ashby",
+      "board_token": "eliseai"
+    },
+    "https://jobs.ashbyhq.com/eliseai/7bc15b47-e510-43ce-b157-8a5ca17161cc": {
+      "status": "judged_reject",
+      "first_seen": "2026-09-18T16:47:43.213802+00:00",
+      "last_updated": "2026-09-18T16:47:43.213811+00:00",
+      "company_name": "EliseAI",
+      "title": "VP of Revenue Operations ",
+      "url": "https://jobs.ashbyhq.com/eliseai/7bc15b47-e510-43ce-b157-8a5ca17161cc",
+      "ats": "ashby",
+      "board_token": "eliseai"
+    },
+    "https://jobs.ashbyhq.com/eliseai/a337f050-4f80-41a7-b20c-0963619812c9": {
+      "status": "judged_reject",
+      "first_seen": "2026-09-18T16:47:43.213825+00:00",
+      "last_updated": "2026-09-18T16:47:43.213834+00:00",
+      "company_name": "EliseAI",
+      "title": "Enterprise Account Executive | Healthcare",
+      "url": "https://jobs.ashbyhq.com/eliseai/a337f050-4f80-41a7-b20c-0963619812c9",
+      "ats": "ashby",
+      "board_token": "eliseai"
+    },
+    "https://jobs.ashbyhq.com/eliseai/41d9bb8e-0e03-4d10-abb2-0f73d3457cd9": {
+      "status": "judged_reject",
+      "first_seen": "2026-09-18T16:47:43.213848+00:00",
+      "last_updated": "2026-09-18T16:47:43.213856+00:00",
+      "company_name": "EliseAI",
+      "title": "Manager of SMB Sales | Housing",
+      "url": "https://jobs.ashbyhq.com/eliseai/41d9bb8e-0e03-4d10-abb2-0f73d3457cd9",
+      "ats": "ashby",
+      "board_token": "eliseai"
+    },
+    "https://jobs.ashbyhq.com/eliseai/5ae5b79b-1f03-4c05-b77c-9bcf14566d0c": {
+      "status": "judged_reject",
+      "first_seen": "2026-09-18T16:47:43.213870+00:00",
+      "last_updated": "2026-09-18T16:47:43.213880+00:00",
+      "company_name": "EliseAI",
+      "title": "Revenue Operations Manager ",
+      "url": "https://jobs.ashbyhq.com/eliseai/5ae5b79b-1f03-4c05-b77c-9bcf14566d0c",
+      "ats": "ashby",
+      "board_token": "eliseai"
+    },
+    "https://jobs.ashbyhq.com/eliseai/f2d9974f-29f7-416f-be19-8d7a796c7abb": {
+      "status": "judged_reject",
+      "first_seen": "2026-09-18T16:47:43.213894+00:00",
+      "last_updated": "2026-09-18T16:47:43.213902+00:00",
+      "company_name": "EliseAI",
+      "title": "Senior Mid-Market Sales Manager | Housing",
+      "url": "https://jobs.ashbyhq.com/eliseai/f2d9974f-29f7-416f-be19-8d7a796c7abb",
+      "ats": "ashby",
+      "board_token": "eliseai"
+    },
+    "https://jobs.ashbyhq.com/eliseai/f0a1f54d-aa6b-4f1b-9a12-6c66cd095dba": {
+      "status": "judged_reject",
+      "first_seen": "2026-09-18T16:47:43.213917+00:00",
+      "last_updated": "2026-09-18T16:47:43.213926+00:00",
+      "company_name": "EliseAI",
+      "title": "Senior Enterprise Sales Manager | Housing",
+      "url": "https://jobs.ashbyhq.com/eliseai/f0a1f54d-aa6b-4f1b-9a12-6c66cd095dba",
+      "ats": "ashby",
+      "board_token": "eliseai"
+    },
+    "https://jobs.ashbyhq.com/eliseai/53606755-076f-4259-810b-372cfd187240": {
+      "status": "judged_reject",
+      "first_seen": "2026-09-18T16:47:43.213941+00:00",
+      "last_updated": "2026-09-18T16:47:43.213950+00:00",
+      "company_name": "EliseAI",
+      "title": "Corporate Development and Partnerships, Manager / Senior Manager | Housing",
+      "url": "https://jobs.ashbyhq.com/eliseai/53606755-076f-4259-810b-372cfd187240",
+      "ats": "ashby",
+      "board_token": "eliseai"
+    },
+    "https://jobs.ashbyhq.com/eliseai/84468a61-9af1-452b-9120-0d72db28a29b": {
+      "status": "judged_reject",
+      "first_seen": "2026-09-18T16:47:43.213964+00:00",
+      "last_updated": "2026-09-18T16:47:43.213973+00:00",
+      "company_name": "EliseAI",
+      "title": "Mid-Market Account Executive | Healthcare",
+      "url": "https://jobs.ashbyhq.com/eliseai/84468a61-9af1-452b-9120-0d72db28a29b",
+      "ats": "ashby",
+      "board_token": "eliseai"
+    },
+    "https://jobs.ashbyhq.com/eliseai/4c6dda70-481f-4b6b-928e-5840b51d3617": {
+      "status": "judged_reject",
+      "first_seen": "2026-09-18T16:47:43.213987+00:00",
+      "last_updated": "2026-09-18T16:47:43.213996+00:00",
+      "company_name": "EliseAI",
+      "title": "Corporate Development and Partnerships, Senior Associate | Housing",
+      "url": "https://jobs.ashbyhq.com/eliseai/4c6dda70-481f-4b6b-928e-5840b51d3617",
+      "ats": "ashby",
+      "board_token": "eliseai"
+    },
+    "https://jobs.ashbyhq.com/eliseai/9fcbf7d5-783e-40f7-82cb-dd2f406b73da": {
+      "status": "judged_reject",
+      "first_seen": "2026-09-18T16:47:43.214010+00:00",
+      "last_updated": "2026-09-18T16:47:43.214018+00:00",
+      "company_name": "EliseAI",
+      "title": "Senior Growth Marketing Manager | Housing",
+      "url": "https://jobs.ashbyhq.com/eliseai/9fcbf7d5-783e-40f7-82cb-dd2f406b73da",
+      "ats": "ashby",
+      "board_token": "eliseai"
+    },
+    "https://jobs.ashbyhq.com/eliseai/5025f40b-79da-4c4d-874c-2ffdea9bcc4e": {
+      "status": "judged_reject",
+      "first_seen": "2026-09-18T16:47:43.214033+00:00",
+      "last_updated": "2026-09-18T16:47:43.214042+00:00",
+      "company_name": "EliseAI",
+      "title": "VP of Marketing",
+      "url": "https://jobs.ashbyhq.com/eliseai/5025f40b-79da-4c4d-874c-2ffdea9bcc4e",
+      "ats": "ashby",
+      "board_token": "eliseai"
+    },
+    "https://jobs.ashbyhq.com/eliseai/7d2f5728-1ddf-49d6-87e8-54fc81cba65c": {
+      "status": "judged_reject",
+      "first_seen": "2026-09-18T16:47:43.214057+00:00",
+      "last_updated": "2026-09-18T16:47:43.214066+00:00",
+      "company_name": "EliseAI",
+      "title": "Growth PM, Future Platforms | Housing",
+      "url": "https://jobs.ashbyhq.com/eliseai/7d2f5728-1ddf-49d6-87e8-54fc81cba65c",
+      "ats": "ashby",
+      "board_token": "eliseai"
+    },
+    "https://jobs.ashbyhq.com/eliseai/6dae94a0-f18d-4828-b409-e70d9d5ebabc": {
+      "status": "judged_reject",
+      "first_seen": "2026-09-18T16:47:43.214082+00:00",
+      "last_updated": "2026-09-18T16:47:43.214091+00:00",
+      "company_name": "EliseAI",
+      "title": "Senior Product Marketing Manager | Housing",
+      "url": "https://jobs.ashbyhq.com/eliseai/6dae94a0-f18d-4828-b409-e70d9d5ebabc",
+      "ats": "ashby",
+      "board_token": "eliseai"
+    },
+    "https://jobs.ashbyhq.com/eliseai/3dbbc964-defa-482a-8695-3b67712b7722": {
+      "status": "judged_reject",
+      "first_seen": "2026-09-18T16:47:43.214106+00:00",
+      "last_updated": "2026-09-18T16:47:43.214115+00:00",
+      "company_name": "EliseAI",
+      "title": "Manager of Customer Success | Housing ",
+      "url": "https://jobs.ashbyhq.com/eliseai/3dbbc964-defa-482a-8695-3b67712b7722",
+      "ats": "ashby",
+      "board_token": "eliseai"
+    },
+    "https://jobs.ashbyhq.com/eliseai/9fdc7ae6-cc9f-4361-a940-39393159ae64": {
+      "status": "judged_reject",
+      "first_seen": "2026-09-18T16:47:43.214309+00:00",
+      "last_updated": "2026-09-18T16:47:43.214317+00:00",
+      "company_name": "EliseAI",
+      "title": "Strategic Sales Manager | Housing",
+      "url": "https://jobs.ashbyhq.com/eliseai/9fdc7ae6-cc9f-4361-a940-39393159ae64",
+      "ats": "ashby",
+      "board_token": "eliseai"
+    },
+    "https://jobs.ashbyhq.com/eliseai/de780d8f-98eb-492b-80fc-6687f3cd65e9": {
+      "status": "judged_reject",
+      "first_seen": "2026-09-18T16:47:43.214333+00:00",
+      "last_updated": "2026-09-18T16:47:43.214342+00:00",
+      "company_name": "EliseAI",
+      "title": "CRM Account Executive",
+      "url": "https://jobs.ashbyhq.com/eliseai/de780d8f-98eb-492b-80fc-6687f3cd65e9",
+      "ats": "ashby",
+      "board_token": "eliseai"
+    },
+    "https://jobs.ashbyhq.com/eliseai/f3a73d76-3314-43eb-a705-9e0db2805c2f": {
+      "status": "judged_reject",
+      "first_seen": "2026-09-18T16:47:43.214356+00:00",
+      "last_updated": "2026-09-18T16:47:43.214366+00:00",
+      "company_name": "EliseAI",
+      "title": "Sales Development Manager | Housing",
+      "url": "https://jobs.ashbyhq.com/eliseai/f3a73d76-3314-43eb-a705-9e0db2805c2f",
+      "ats": "ashby",
+      "board_token": "eliseai"
+    },
+    "https://jobs.ashbyhq.com/eliseai/c4cfd7ee-6a65-40a5-889a-368e751402b5": {
+      "status": "judged_reject",
+      "first_seen": "2026-09-18T16:47:43.214381+00:00",
+      "last_updated": "2026-09-18T16:47:43.214389+00:00",
+      "company_name": "EliseAI",
+      "title": "VP of Growth",
+      "url": "https://jobs.ashbyhq.com/eliseai/c4cfd7ee-6a65-40a5-889a-368e751402b5",
+      "ats": "ashby",
+      "board_token": "eliseai"
+    },
+    "https://jobs.ashbyhq.com/eliseai/bb1bec73-e828-491c-abcb-38913f613158": {
+      "status": "judged_reject",
+      "first_seen": "2026-09-18T16:47:43.214405+00:00",
+      "last_updated": "2026-09-18T16:47:43.214415+00:00",
+      "company_name": "EliseAI",
+      "title": "Mid-Market Account Executive, Future Platforms | Housing",
+      "url": "https://jobs.ashbyhq.com/eliseai/bb1bec73-e828-491c-abcb-38913f613158",
+      "ats": "ashby",
+      "board_token": "eliseai"
+    },
+    "https://jobs.ashbyhq.com/eliseai/e29ccfc9-1d40-4d68-9d49-bff754efed3a": {
+      "status": "judged_reject",
+      "first_seen": "2026-09-18T16:47:43.214431+00:00",
+      "last_updated": "2026-09-18T16:47:43.214439+00:00",
+      "company_name": "EliseAI",
+      "title": "SMB Sales Manager | Healthcare",
+      "url": "https://jobs.ashbyhq.com/eliseai/e29ccfc9-1d40-4d68-9d49-bff754efed3a",
+      "ats": "ashby",
+      "board_token": "eliseai"
+    },
+    "https://jobs.ashbyhq.com/eliseai/4a88ea31-ee6d-4af5-8cc5-e901ed0239f6": {
+      "status": "judged_reject",
+      "first_seen": "2026-09-18T16:47:43.214454+00:00",
+      "last_updated": "2026-09-18T16:47:43.214463+00:00",
+      "company_name": "EliseAI",
+      "title": "SMB Account Executive | Housing",
+      "url": "https://jobs.ashbyhq.com/eliseai/4a88ea31-ee6d-4af5-8cc5-e901ed0239f6",
+      "ats": "ashby",
+      "board_token": "eliseai"
+    },
+    "https://jobs.ashbyhq.com/eliseai/7fa18983-1f46-4df5-9af7-4f6c5d797a5d": {
+      "status": "judged_reject",
+      "first_seen": "2026-09-18T16:47:43.214480+00:00",
+      "last_updated": "2026-09-18T16:47:43.214486+00:00",
+      "company_name": "EliseAI",
+      "title": "Compliance Officer, Financial Services and Bank Partnerships | Housing",
+      "url": "https://jobs.ashbyhq.com/eliseai/7fa18983-1f46-4df5-9af7-4f6c5d797a5d",
+      "ats": "ashby",
+      "board_token": "eliseai"
+    },
+    "https://jobs.ashbyhq.com/eliseai/e768dcd3-8397-4723-83d4-8fc53c5039fe": {
+      "status": "judged_reject",
+      "first_seen": "2026-09-18T16:47:43.214501+00:00",
+      "last_updated": "2026-09-18T16:47:43.214509+00:00",
+      "company_name": "EliseAI",
+      "title": "Enterprise Sales Manager | Healthcare",
+      "url": "https://jobs.ashbyhq.com/eliseai/e768dcd3-8397-4723-83d4-8fc53c5039fe",
+      "ats": "ashby",
+      "board_token": "eliseai"
+    },
+    "https://jobs.ashbyhq.com/eliseai/75188477-8fd8-4e18-85e0-b212496a4edd": {
+      "status": "judged_reject",
+      "first_seen": "2026-09-18T16:47:43.214684+00:00",
+      "last_updated": "2026-09-18T16:47:43.214701+00:00",
+      "company_name": "EliseAI",
+      "title": "Enterprise Account Executive, Future Platforms | Housing",
+      "url": "https://jobs.ashbyhq.com/eliseai/75188477-8fd8-4e18-85e0-b212496a4edd",
+      "ats": "ashby",
+      "board_token": "eliseai"
+    },
+    "https://jobs.ashbyhq.com/gainsight/60752d51-77dc-4bf8-b8d9-089f97b50bc6": {
+      "status": "judged_reject",
+      "first_seen": "2026-09-18T16:47:43.214718+00:00",
+      "last_updated": "2026-09-18T16:47:43.214725+00:00",
+      "company_name": "Gainsight",
+      "title": "Manager, Customer Success",
+      "url": "https://jobs.ashbyhq.com/gainsight/60752d51-77dc-4bf8-b8d9-089f97b50bc6",
+      "ats": "ashby",
+      "board_token": "gainsight"
+    },
+    "https://technologyadvice.com/careers/opportunities/6198783004?gh_jid=6198783004": {
+      "status": "judged_reject",
+      "first_seen": "2026-09-18T16:47:43.214739+00:00",
+      "last_updated": "2026-09-18T16:47:43.214747+00:00",
+      "company_name": "TechnologyAdvice",
+      "title": "Product Marketing Manager",
+      "url": "https://technologyadvice.com/careers/opportunities/6198783004?gh_jid=6198783004",
+      "ats": "greenhouse",
+      "board_token": "technologyadvice"
+    },
+    "https://job-boards.greenhouse.io/eulerity/jobs/4710777006": {
+      "status": "judged_reject",
+      "first_seen": "2026-09-18T16:47:43.214762+00:00",
+      "last_updated": "2026-09-18T16:47:43.214771+00:00",
+      "company_name": "Eulerity",
+      "title": "AI first Account Executive, Revenue Development",
+      "url": "https://job-boards.greenhouse.io/eulerity/jobs/4710777006",
+      "ats": "greenhouse",
+      "board_token": "eulerity"
+    },
+    "https://job-boards.greenhouse.io/eulerity/jobs/4713235006": {
+      "status": "judged_reject",
+      "first_seen": "2026-09-18T16:47:43.214785+00:00",
+      "last_updated": "2026-09-18T16:47:43.214792+00:00",
+      "company_name": "Eulerity",
+      "title": "Customer Success Manager - Performance Marketing, AI & Automation",
+      "url": "https://job-boards.greenhouse.io/eulerity/jobs/4713235006",
+      "ats": "greenhouse",
+      "board_token": "eulerity"
+    },
+    "https://job-boards.greenhouse.io/eulerity/jobs/4709340006": {
+      "status": "judged_reject",
+      "first_seen": "2026-09-18T16:47:43.214870+00:00",
+      "last_updated": "2026-09-18T16:47:43.214880+00:00",
+      "company_name": "Eulerity",
+      "title": "Forward Deployed Marketing Strategist",
+      "url": "https://job-boards.greenhouse.io/eulerity/jobs/4709340006",
+      "ats": "greenhouse",
+      "board_token": "eulerity"
+    },
+    "https://job-boards.greenhouse.io/eulerity/jobs/4714367006": {
+      "status": "judged_reject",
+      "first_seen": "2026-09-18T16:47:43.214896+00:00",
+      "last_updated": "2026-09-18T16:47:43.214906+00:00",
+      "company_name": "Eulerity",
+      "title": "Technical Product Marketing Intern - AI & Automation",
+      "url": "https://job-boards.greenhouse.io/eulerity/jobs/4714367006",
+      "ats": "greenhouse",
+      "board_token": "eulerity"
+    },
+    "https://jobs.ashbyhq.com/poshmark/c051e4c3-580a-4dff-b5bc-b40c6fc40eb6": {
+      "status": "judged_reject",
+      "first_seen": "2026-09-18T16:47:43.214921+00:00",
+      "last_updated": "2026-09-18T16:47:43.214930+00:00",
+      "company_name": "Poshmark",
+      "title": "Director, Supply Partnerships",
+      "url": "https://jobs.ashbyhq.com/poshmark/c051e4c3-580a-4dff-b5bc-b40c6fc40eb6",
+      "ats": "ashby",
+      "board_token": "poshmark"
+    },
+    "https://jobs.ashbyhq.com/Acorns/d9924960-6e16-460d-9004-638737014425": {
+      "status": "judged_reject",
+      "first_seen": "2026-09-18T16:47:43.214945+00:00",
+      "last_updated": "2026-09-18T16:47:43.214955+00:00",
+      "company_name": "Acorns",
+      "title": "Sr. Brand Marketing Manager",
+      "url": "https://jobs.ashbyhq.com/Acorns/d9924960-6e16-460d-9004-638737014425",
+      "ats": "ashby",
+      "board_token": "Acorns"
+    },
+    "https://jobs.ashbyhq.com/Acorns/79c7730e-623a-4088-b21b-e89489edc29f": {
+      "status": "judged_reject",
+      "first_seen": "2026-09-18T16:47:43.214979+00:00",
+      "last_updated": "2026-09-18T16:47:43.214988+00:00",
+      "company_name": "Acorns",
+      "title": "Senior Lifecycle Marketing Associate",
+      "url": "https://jobs.ashbyhq.com/Acorns/79c7730e-623a-4088-b21b-e89489edc29f",
+      "ats": "ashby",
+      "board_token": "Acorns"
+    },
+    "https://jobs.ashbyhq.com/grow-therapy/b2ff7626-cd25-4f2a-851c-6b77345209a5": {
+      "status": "judged_reject",
+      "first_seen": "2026-09-18T16:47:43.214999+00:00",
+      "last_updated": "2026-09-18T16:47:43.215005+00:00",
+      "company_name": "Grow Therapy",
+      "title": "Senior/Staff Product Designer, Growth",
+      "url": "https://jobs.ashbyhq.com/grow-therapy/b2ff7626-cd25-4f2a-851c-6b77345209a5",
+      "ats": "ashby",
+      "board_token": "grow-therapy"
+    },
+    "https://jobs.ashbyhq.com/grow-therapy/e147bc25-009b-40b2-ad02-2f8a957a7398": {
+      "status": "judged_reject",
+      "first_seen": "2026-09-18T16:47:43.215014+00:00",
+      "last_updated": "2026-09-18T16:47:43.215019+00:00",
+      "company_name": "Grow Therapy",
+      "title": "Commercial Strategy Senior Manager",
+      "url": "https://jobs.ashbyhq.com/grow-therapy/e147bc25-009b-40b2-ad02-2f8a957a7398",
+      "ats": "ashby",
+      "board_token": "grow-therapy"
+    },
+    "https://jobs.ashbyhq.com/grow-therapy/31f85f93-5202-4c30-99f6-b9c95af46562": {
+      "status": "judged_reject",
+      "first_seen": "2026-09-18T16:47:43.215028+00:00",
+      "last_updated": "2026-09-18T16:47:43.215033+00:00",
+      "company_name": "Grow Therapy",
+      "title": "Director, Revenue Cycle Management Operations",
+      "url": "https://jobs.ashbyhq.com/grow-therapy/31f85f93-5202-4c30-99f6-b9c95af46562",
+      "ats": "ashby",
+      "board_token": "grow-therapy"
+    },
+    "https://jobs.ashbyhq.com/grow-therapy/1fa2678d-c587-4ef0-9268-2d1266b8bfe7": {
+      "status": "judged_reject",
+      "first_seen": "2026-09-18T16:47:43.215041+00:00",
+      "last_updated": "2026-09-18T16:47:43.215046+00:00",
+      "company_name": "Grow Therapy",
+      "title": "Director, Lifecycle & Retention",
+      "url": "https://jobs.ashbyhq.com/grow-therapy/1fa2678d-c587-4ef0-9268-2d1266b8bfe7",
+      "ats": "ashby",
+      "board_token": "grow-therapy"
+    },
+    "https://jobs.ashbyhq.com/grow-therapy/a73d3d6a-4eed-4e57-851d-d04809534048": {
+      "status": "judged_reject",
+      "first_seen": "2026-09-18T16:47:43.215056+00:00",
+      "last_updated": "2026-09-18T16:47:43.215062+00:00",
+      "company_name": "Grow Therapy",
+      "title": "Senior Growth Manager, Strategic Partnerships",
+      "url": "https://jobs.ashbyhq.com/grow-therapy/a73d3d6a-4eed-4e57-851d-d04809534048",
+      "ats": "ashby",
+      "board_token": "grow-therapy"
+    }
+  }
+}
