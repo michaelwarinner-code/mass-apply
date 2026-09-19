@@ -39,11 +39,32 @@ def load_profile():
         return f.read()
 
 
-def safe_folder_name(company: str, title: str) -> str:
+_USED_FOLDER_NAMES = set()
+
+
+def _job_id_from_url(url: str) -> str:
+    m = re.search(r'/jobs/([A-Za-z0-9]+)', url)
+    return m.group(1) if m else str(abs(hash(url)) % 10000)
+
+
+def safe_folder_name(company: str, title: str, url: str = "") -> str:
     # Strip characters that are illegal (Windows) or just awkward in a
-    # folder name, keep it readable.
+    # folder name, keep it readable. When two different postings share
+    # the same company+title (e.g. the same role open in two cities),
+    # tag the job's id from its URL onto the folder name so they don't
+    # collide -- a collision here isn't just cosmetic: the second job's
+    # PDF build tries to rename into a file the first job already
+    # created, which crashes on Windows and silently loses that job's
+    # materials for the run.
     raw = f"{company} -- {title}".strip()
-    return re.sub(r'[\\/*?:"<>|]', "", raw)[:150]
+    base = re.sub(r'[\\/*?:"<>|]', "", raw)[:150]
+    name = base
+    if name in _USED_FOLDER_NAMES:
+        job_id = _job_id_from_url(url)
+        suffix = f" ({job_id})"
+        name = base[:150 - len(suffix)] + suffix
+    _USED_FOLDER_NAMES.add(name)
+    return name
 
 
 def process_one_job(job: dict, batch_dir: str, candidate_info: dict, bank_entries: list) -> bool:
@@ -58,7 +79,7 @@ def process_one_job(job: dict, batch_dir: str, candidate_info: dict, bank_entrie
     down since it was judged, rather than generating materials against
     stale/missing text."""
     company, title, url = job["company_name"], job["title"], job["url"]
-    folder_name = safe_folder_name(company, title)
+    folder_name = safe_folder_name(company, title, url)
     job_dir = os.path.join(batch_dir, folder_name)
     os.makedirs(job_dir, exist_ok=True)
 
