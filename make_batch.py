@@ -2,15 +2,18 @@
 The real run: discovers + judges new postings, then for up to BATCH_SIZE
 jobs (newly matched this run, plus any already judged_fit from a
 previous run that never made it into a batch), generates a complete,
-ready-to-review application folder -- resume + cover letter (separate
-PDFs, or one combined PDF if the posting only has one upload slot), a
-notes.txt with every real question paired with its best answer, and logs
-a row to the same Google Sheet job-finder uses. Prints every portal link
-at the end so you have them all in one place.
+ready-to-review application folder -- separate resume + cover letter
+PDFs, and a notes.txt with just the company/title/portal link -- and
+logs a row to the same Google Sheet job-finder uses. Prints every portal
+link at the end so you have them all in one place.
 
-Nothing here submits anything or touches a browser beyond the read-only
-form scan -- output is entirely local files for you to review and act on
-by hand.
+No form scanning or question/answer generation happens here anymore --
+that feature (reading the real application form and drafting answers)
+was dropped since it wasn't being used. You fill out each application's
+actual questions by hand using the portal link.
+
+Nothing here submits anything or touches a browser at all -- output is
+entirely local files for you to review and act on by hand.
 
     python make_batch.py
 """
@@ -21,12 +24,9 @@ from datetime import date
 
 from target_list_exclusion import load_target_company_names
 from discovery_pipeline import discover_and_judge
-from form_scanner import scan_fields_only, has_separate_upload_slots
 from job_lookup import fetch_job_by_url
 from materials_writer import generate_materials
-from pdf_builder import build_resume_and_coverletter, build_combined_resume_coverletter
-from answer_bank import load_answer_bank
-from notes_builder import load_candidate_info, build_notes_text
+from pdf_builder import build_resume_and_coverletter
 from sheets_logger import append_application_row
 import batch_state as bs
 
@@ -67,17 +67,22 @@ def safe_folder_name(company: str, title: str, url: str = "") -> str:
     return name
 
 
-def process_one_job(job: dict, batch_dir: str, candidate_info: dict, bank_entries: list) -> bool:
+def process_one_job(job: dict, batch_dir: str) -> bool:
     """Returns True on success. Sets the job's batch_state status either
-    way (in_batch on success, failed_materials/failed_form_scan on
-    failure) so it's never silently retried forever.
+    way (in_batch on success, failed_materials on failure) so it's never
+    silently retried forever.
 
     job only needs company_name/title/url -- description isn't persisted
-    in batch_state.json (would bloat it over time with full posting text
-    for every job ever judged), so this re-fetches the live posting fresh
-    here instead. That also naturally catches a posting that's been taken
-    down since it was judged, rather than generating materials against
-    stale/missing text."""
+    in batch_state.json for greenhouse/ashby/lever (would bloat it over
+    time with full posting text for every job ever judged), so this
+    re-fetches the live posting fresh here instead for those three. That
+    also naturally catches a posting that's been taken down since it was
+    judged, rather than generating materials against stale/missing text.
+
+    Workday is the exception: there's no clean single-job re-fetch for an
+    arbitrary tenant, so its description was captured once at judge time
+    and stored in batch_state.json (see discovery_pipeline.py) -- job
+    already carries it here, no live re-fetch, and no staleness check."""
     company, title, url = job["company_name"], job["title"], job["url"]
     folder_name = safe_folder_name(company, title, url)
     job_dir = os.path.join(batch_dir, folder_name)
@@ -85,18 +90,18 @@ def process_one_job(job: dict, batch_dir: str, candidate_info: dict, bank_entrie
 
     print(f"\n=== {company} -- {title} ===\n  {url}")
 
-    try:
-        live_job = fetch_job_by_url(url, company_name=company)
-    except Exception as e:
-        print(f"  Could not re-fetch live posting (may have been taken down): {e}")
-        return False
-    description = live_job["description"]
-
-    try:
-        fields = scan_fields_only(url)
-    except Exception as e:
-        print(f"  Form scan FAILED: {e}")
-        return False
+    if job.get("ats") == "workday":
+        description = job.get("description", "")
+        if not description:
+            print("  No description available for this Workday posting (none captured at judge time)")
+            return False
+    else:
+        try:
+            live_job = fetch_job_by_url(url, company_name=company)
+        except Exception as e:
+            print(f"  Could not re-fetch live posting (may have been taken down): {e}")
+            return False
+        description = live_job["description"]
 
     try:
         print("  Generating materials...")
@@ -106,23 +111,17 @@ def process_one_job(job: dict, batch_dir: str, candidate_info: dict, bank_entrie
         return False
 
     try:
-        if has_separate_upload_slots(fields):
-            print("  Building separate resume + cover letter PDFs...")
-            resume_pdf, cl_pdf = build_resume_and_coverletter(resume_data, coverletter_data, job_dir)
-            os.rename(resume_pdf, os.path.join(job_dir, "michael_warinner_resume.pdf"))
-            os.rename(cl_pdf, os.path.join(job_dir, "michael_warinner_cover_letter.pdf"))
-        else:
-            print("  Only one upload slot found -- building ONE combined PDF (cover letter pg 1, resume pg 2)...")
-            combined_pdf = build_combined_resume_coverletter(resume_data, coverletter_data, job_dir)
-            os.rename(combined_pdf, os.path.join(job_dir, "michael_warinner_resume_cover_letter.pdf"))
+        print("  Building separate resume + cover letter PDFs...")
+        resume_pdf, cl_pdf = build_resume_and_coverletter(resume_data, coverletter_data, job_dir)
+        os.rename(resume_pdf, os.path.join(job_dir, "michael_warinner_resume.pdf"))
+        os.rename(cl_pdf, os.path.join(job_dir, "michael_warinner_cover_letter.pdf"))
     except Exception as e:
         print(f"  PDF build FAILED: {e}")
         return False
 
-    notes = build_notes_text(fields, candidate_info, bank_entries, company_name=company)
-    notes_header = f"{company} -- {title}\nApplication portal: {url}\n\n" + "=" * 40 + "\n\n"
+    notes_header = f"{company} -- {title}\nApplication portal: {url}\n"
     with open(os.path.join(job_dir, "notes.txt"), "w", encoding="utf-8") as f:
-        f.write(notes_header + notes)
+        f.write(notes_header)
 
     try:
         append_application_row(date.today().isoformat(), title, company, description, job_url=url)
@@ -167,8 +166,6 @@ def main():
 
     profile = load_profile()
     target_names = load_target_company_names()
-    candidate_info = load_candidate_info()
-    bank_entries = load_answer_bank()
 
     state = bs.load_state()
     already_judged_urls = set(state["jobs"].keys())
@@ -192,8 +189,15 @@ def main():
                                                already_judged_urls=already_judged_urls, max_matches=still_needed,
                                                limit=args.board_limit)
     for m in matches:
+        # description is only carried into state for workday matches --
+        # process_one_job needs it later since workday has no clean
+        # single-job re-fetch (see discovery_pipeline.py/job_lookup.py).
+        # Left out for greenhouse/ashby/lever to avoid bloating state
+        # with full posting text for every job ever judged, since those
+        # three get a fresh copy re-fetched at build time instead.
+        extra = {"description": m["description"]} if m.get("ats") == "workday" else {}
         bs.set_job_status(state, m["url"], "judged_fit", company_name=m["company_name"], title=m["title"],
-                           url=m["url"], ats=m["ats"], board_token=m["board_token"])
+                           url=m["url"], ats=m["ats"], board_token=m["board_token"], **extra)
     for r in rejects:
         bs.set_job_status(state, r["url"], "judged_reject", company_name=r["company_name"], title=r["title"],
                            url=r["url"], ats=r["ats"], board_token=r["board_token"])
@@ -216,7 +220,7 @@ def main():
 
     links = []
     for job_id, job in to_process:
-        success = process_one_job(job, batch_dir, candidate_info, bank_entries)
+        success = process_one_job(job, batch_dir)
         if success:
             bs.set_job_status(state, job_id, "in_batch", batch_folder=batch_dir)
             links.append(f"{job['company_name']} -- {job['title']}: {job['url']}")

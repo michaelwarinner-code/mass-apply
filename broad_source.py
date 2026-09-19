@@ -42,6 +42,13 @@ RETRY_BACKOFF_SECONDS = 5
 
 GREENHOUSE_URL_RE = re.compile(r"boards\.greenhouse\.io/([a-zA-Z0-9_-]+)")
 ASHBY_URL_RE = re.compile(r"jobs\.ashbyhq\.com/([a-zA-Z0-9_-]+)")
+LEVER_URL_RE = re.compile(r"jobs\.lever\.co/([a-zA-Z0-9_-]+)/")
+# Workday apply URLs look like:
+#   https://{tenant}.{wdN}.myworkdayjobs.com/{locale}/{site}/job/{...}
+# wdN varies per company (wd1, wd3, wd5, ...) -- not a fixed cluster.
+WORKDAY_URL_RE = re.compile(
+    r"https?://([a-zA-Z0-9_-]+)\.(wd\d+)\.myworkdayjobs\.com/([a-zA-Z0-9_-]+)/([a-zA-Z0-9_-]+)(/job/.+)"
+)
 
 # Kept broad and overlapping with keyword_filter.py's POSITIVE_SIGNALS on purpose --
 # this list decides what we ASK the aggregator for; keyword_filter.py still runs
@@ -61,10 +68,21 @@ def _extract_ats_and_token(job: dict):
     live responses) over regex-parsing the apply URL, which only worked
     before by coincidence (job-boards.greenhouse.io happens to contain the
     substring boards.greenhouse.io). Falls back to URL parsing only if
-    source/source_slug are ever missing from a given record."""
+    source/source_slug are ever missing from a given record.
+
+    "lever" is included in the trusted source-field fast path on the
+    assumption Fantastic Jobs tags it the same consistent way it tags
+    greenhouse/ashby -- unverified against a live response, so if lever
+    postings aren't showing up, check whether the source field actually
+    says "lever" before assuming the URL regex fallback is the problem.
+
+    Workday has no clean single "board_token" the way the others do (a
+    company's board isn't addressable by one slug), so this returns the
+    tenant name as the token -- good enough for grouping/logging, not
+    meant to be used to re-fetch anything later."""
     source = (job.get("source") or "").lower()
     slug = job.get("source_slug")
-    if source in ("greenhouse", "ashby") and slug:
+    if source in ("greenhouse", "ashby", "lever") and slug:
         return source, slug
 
     apply_url = job.get("url") or job.get("final_url") or job.get("application_url", "")
@@ -76,6 +94,13 @@ def _extract_ats_and_token(job: dict):
     ashby = ASHBY_URL_RE.search(apply_url)
     if ashby:
         return "ashby", ashby.group(1)
+    lever = LEVER_URL_RE.search(apply_url)
+    if lever:
+        return "lever", lever.group(1)
+    wd = WORKDAY_URL_RE.search(apply_url)
+    if wd:
+        tenant = wd.group(1)
+        return "workday", tenant
     return None, None
 
 
@@ -120,10 +145,21 @@ def _build_combined_title_query() -> str:
 def discover_greenhouse_ashby_postings(api_key: str) -> list:
     """
     Runs ONE combined-keyword search (all of SEARCH_KEYWORDS OR'd together
-    into a single title query), keeps only Greenhouse/Ashby-hosted postings,
-    dedupes by apply URL, and returns:
-        [{"ats": "greenhouse"|"ashby", "board_token": str,
-          "company_name": str, "title": str, "apply_url": str}, ...]
+    into a single title query), keeps only Greenhouse/Ashby/Lever/Workday-
+    hosted postings, dedupes by apply URL, and returns:
+        [{"ats": "greenhouse"|"ashby"|"lever"|"workday", "board_token": str,
+          "company_name": str, "title": str, "apply_url": str,
+          "description": str}, ...]
+
+    description is included here (not just re-fetched later like
+    Greenhouse/Ashby/Lever get) specifically so Workday postings have
+    something to judge/build materials from without needing a dedicated
+    live Workday fetcher -- there's no cheap "list every posting" call for
+    an arbitrary Workday tenant the way the other three have, so Workday
+    postings are judged directly from this aggregator copy instead of a
+    clean re-fetch. Kept on every record (not just workday's) for
+    simplicity; unused for the other three since they get a fresher copy
+    downstream.
     """
     combined_title = _build_combined_title_query()
     seen_urls = set()
@@ -166,7 +202,7 @@ def discover_greenhouse_ashby_postings(api_key: str) -> list:
             continue
         ats, token = _extract_ats_and_token(job)
         if not ats:
-            continue  # not Greenhouse/Ashby-hosted -- applier can't handle it, skip
+            continue  # not a supported ATS (greenhouse/ashby/lever/workday) -- skip
         seen_urls.add(apply_url)
         out.append({
             "ats": ats,
@@ -174,9 +210,10 @@ def discover_greenhouse_ashby_postings(api_key: str) -> list:
             "company_name": job.get("organization") or job.get("company_name") or job.get("company", ""),
             "title": job.get("title", ""),
             "apply_url": apply_url,
+            "description": job.get("description", ""),
         })
 
-    print(f"[broad-discovery] {len(out)} unique Greenhouse/Ashby postings found "
+    print(f"[broad-discovery] {len(out)} unique supported-ATS postings found "
           f"from 1 combined-keyword request (was {len(SEARCH_KEYWORDS)} separate requests before)")
     return out
 

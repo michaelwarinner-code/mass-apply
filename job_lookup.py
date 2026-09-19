@@ -4,14 +4,21 @@ one job's apply URL, figures out which ATS it's on, fetches that
 company's board, and returns the matching posting's full data (title,
 company, description) -- not the aggregator's possibly-truncated copy.
 """
-from broad_source import GREENHOUSE_URL_RE, ASHBY_URL_RE
-from ats_fetchers import fetch_greenhouse, fetch_ashby
+from broad_source import GREENHOUSE_URL_RE, ASHBY_URL_RE, LEVER_URL_RE
+from ats_fetchers import fetch_greenhouse, fetch_ashby, fetch_lever
+
+FETCHERS = {"greenhouse": fetch_greenhouse, "ashby": fetch_ashby, "lever": fetch_lever}
 
 
 def fetch_job_by_url(url: str, company_name: str = None) -> dict:
-    """Raises ValueError if the URL isn't a recognized Greenhouse/Ashby
-    posting, or if that company's board doesn't currently list this URL
-    (posting taken down, or the URL's slightly off).
+    """Raises ValueError if the URL isn't a recognized Greenhouse/Ashby/
+    Lever posting, or if that company's board doesn't currently list this
+    URL (posting taken down, or the URL's slightly off).
+
+    Workday isn't handled here on purpose -- there's no clean single-job
+    re-fetch for an arbitrary Workday tenant, so Workday postings skip
+    this live re-fetch entirely and make_batch.py uses the description
+    already captured at judge time instead (see discovery_pipeline.py).
 
     ats_fetchers' per-job records don't include a company name (that only
     exists on the aggregator's own copy, from stage 1/broad_source.py) --
@@ -23,11 +30,15 @@ def fetch_job_by_url(url: str, company_name: str = None) -> dict:
         token, ats = gh.group(1), "greenhouse"
     else:
         ashby = ASHBY_URL_RE.search(url)
-        if not ashby:
-            raise ValueError(f"Not a recognized Greenhouse/Ashby URL: {url}")
-        token, ats = ashby.group(1), "ashby"
+        if ashby:
+            token, ats = ashby.group(1), "ashby"
+        else:
+            lever = LEVER_URL_RE.search(url)
+            if not lever:
+                raise ValueError(f"Not a recognized Greenhouse/Ashby/Lever URL: {url}")
+            token, ats = lever.group(1), "lever"
 
-    jobs = fetch_greenhouse(token) if ats == "greenhouse" else fetch_ashby(token)
+    jobs = FETCHERS[ats](token)
     for job in jobs:
         if job.get("url", "").rstrip("/") == url.rstrip("/"):
             resolved_company = company_name or token.replace("-", " ").replace("_", " ").title()
