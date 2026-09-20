@@ -19,15 +19,12 @@ entirely local files for you to review and act on by hand.
 """
 import argparse
 import os
-import re
 from datetime import date
 
 from target_list_exclusion import load_target_company_names
 from discovery_pipeline import discover_and_judge
 from job_lookup import fetch_job_by_url
-from materials_writer import generate_materials
-from pdf_builder import build_resume_and_coverletter
-from sheets_logger import append_application_row
+from job_builder import build_job_folder, safe_folder_name
 import batch_state as bs
 
 BATCH_SIZE = 10
@@ -37,34 +34,6 @@ PROFILE_PATH = os.path.join(os.path.dirname(__file__), "state", "candidate_profi
 def load_profile():
     with open(PROFILE_PATH, encoding="utf-8") as f:
         return f.read()
-
-
-_USED_FOLDER_NAMES = set()
-
-
-def _job_id_from_url(url: str) -> str:
-    m = re.search(r'/jobs/([A-Za-z0-9]+)', url)
-    return m.group(1) if m else str(abs(hash(url)) % 10000)
-
-
-def safe_folder_name(company: str, title: str, url: str = "") -> str:
-    # Strip characters that are illegal (Windows) or just awkward in a
-    # folder name, keep it readable. When two different postings share
-    # the same company+title (e.g. the same role open in two cities),
-    # tag the job's id from its URL onto the folder name so they don't
-    # collide -- a collision here isn't just cosmetic: the second job's
-    # PDF build tries to rename into a file the first job already
-    # created, which crashes on Windows and silently loses that job's
-    # materials for the run.
-    raw = f"{company} -- {title}".strip()
-    base = re.sub(r'[\\/*?:"<>|]', "", raw)[:150]
-    name = base
-    if name in _USED_FOLDER_NAMES:
-        job_id = _job_id_from_url(url)
-        suffix = f" ({job_id})"
-        name = base[:150 - len(suffix)] + suffix
-    _USED_FOLDER_NAMES.add(name)
-    return name
 
 
 def process_one_job(job: dict, batch_dir: str) -> bool:
@@ -86,7 +55,6 @@ def process_one_job(job: dict, batch_dir: str) -> bool:
     company, title, url = job["company_name"], job["title"], job["url"]
     folder_name = safe_folder_name(company, title, url)
     job_dir = os.path.join(batch_dir, folder_name)
-    os.makedirs(job_dir, exist_ok=True)
 
     print(f"\n=== {company} -- {title} ===\n  {url}")
 
@@ -103,35 +71,7 @@ def process_one_job(job: dict, batch_dir: str) -> bool:
             return False
         description = live_job["description"]
 
-    try:
-        print("  Generating materials...")
-        resume_data, coverletter_data = generate_materials(description, company, title)
-    except Exception as e:
-        print(f"  Materials generation FAILED: {e}")
-        return False
-
-    try:
-        print("  Building separate resume + cover letter PDFs...")
-        resume_pdf, cl_pdf = build_resume_and_coverletter(resume_data, coverletter_data, job_dir)
-        os.rename(resume_pdf, os.path.join(job_dir, "michael_warinner_resume.pdf"))
-        os.rename(cl_pdf, os.path.join(job_dir, "michael_warinner_cover_letter.pdf"))
-    except Exception as e:
-        print(f"  PDF build FAILED: {e}")
-        return False
-
-    notes_header = f"{company} -- {title}\nApplication portal: {url}\n"
-    with open(os.path.join(job_dir, "notes.txt"), "w", encoding="utf-8") as f:
-        f.write(notes_header)
-
-    try:
-        append_application_row(date.today().isoformat(), title, company, description, job_url=url)
-    except Exception as e:
-        # A Sheets hiccup shouldn't lose an otherwise-complete folder --
-        # worth knowing loudly, not worth failing the whole job over.
-        print(f"  WARNING: could not log to Google Sheets: {e}")
-
-    print(f"  Done -- {job_dir}")
-    return True
+    return build_job_folder(company, title, url, description, job_dir)
 
 
 def main():
