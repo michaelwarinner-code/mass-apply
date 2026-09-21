@@ -53,7 +53,10 @@ resume_data.json:
     "location": "Houston, TX",
     "degree": "Bachelor of Science in Management Information Systems",
     "dates": "May 2026",
-    "scholarship": "Awarded Chick-fil-A Remarkable Futures Scholarship in 2022, 2024, and 2025."
+    "scholarship": [
+      "Awarded Chick-fil-A Remarkable Futures Scholarship in 2022, 2024, and 2025.",
+      "Google Ads Search Certification (2026), Skillshop"
+    ]
   },
   "personalProjects": ["...", "..."],
   "skills": {

@@ -107,11 +107,18 @@ function educationBlock(edu) {
     children: [new TextRun({ text: edu.degree, italics: true, font: FONT, size: 22 })]
   }));
   if (edu.scholarship) {
-    paras.push(new Paragraph({
-      bullet: { level: 0 },
-      spacing: { before: 60, after: 120 },
-      children: [new TextRun({ text: edu.scholarship, font: FONT, size: 22 })]
-    }));
+    // scholarship is now a list (one bullet per line -- e.g. the
+    // scholarship itself plus a certification), but still accepts a
+    // plain string for backward compatibility with any older content
+    // file that hasn't been regenerated yet.
+    const lines = Array.isArray(edu.scholarship) ? edu.scholarship : [edu.scholarship];
+    lines.forEach((line, i) => {
+      paras.push(new Paragraph({
+        bullet: { level: 0 },
+        spacing: i === lines.length - 1 ? { before: 60, after: 120 } : { before: 60 },
+        children: [new TextRun({ text: line, font: FONT, size: 22 })]
+      }));
+    });
   }
   return paras;
 }
