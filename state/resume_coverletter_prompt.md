@@ -292,7 +292,7 @@ App sales growth [E2], Campaign management (email, social media, digital, in-sto
 
 ## EXPERIENCE BANK
 
-**Customer Sales & Marketing Intern — The Coca-Cola Company | Atlanta GA | May 2026 - Aug 2026**
+**Customer Sales & Marketing Intern — The Coca-Cola Company | Atlanta GA | May 2026 - Jul 2026**
 Summary: I was the Customer Sales & Marketing Intern - I worked in Customer Marketing on the East Region of FSOP (Food Service & On Premise). I worked with foodservice customers of Coca-Cola to sell more Coca-Cola beverages at the restaurant.
 Projects:
 1. Developed a marketing program for foodservice account teams to drive beverage sales and guest traffic. I defined target customer segments, execution steps, and success metrics from sell-in through activation. This program is set to be activated in market in Spring & Summer of 2027.
